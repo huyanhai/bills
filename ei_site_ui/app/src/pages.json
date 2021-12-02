@@ -1,148 +1,163 @@
 {
-    "pages": [{
-            "path": "pages/Index",
-            "style": {
-                "navigationBarTitleText": "票盟云"
-            }
-        },
+  "pages": [
+    {
+      "path": "pages/Index",
+      "style": {
+        "navigationBarTitleText": "票盟云"
+      }
+    },
 
-        {
-            "path": "pages/Billing",
-            "style": {
-                "navigationBarTitleText": "开票"
-            }
-        },
-        {
-            "path": "pages/WaitingDetails",
-            "style": {
-                "navigationBarTitleText": "待开详情"
-            }
-        },
-        {
-            "path": "pages/Red",
-            "style": {
-                "navigationBarTitleText": "冲红发票"
-            }
-        },
-        {
-            "path": "pages/Billed",
-            "style": {
-                "navigationBarTitleText": "已开票"
-            }
-        },
-        {
-            "path": "pages/Login",
-            "style": {
-                "navigationBarTitleText": "票盟云"
-            }
-        },
-        {
-            "path": "pages/Open",
-            "style": {
-                "navigationBarTitleText": "选择套餐"
-            }
-        },
-        {
-            "path": "pages/My",
-            "style": {
-                "navigationBarTitleText": "我的"
-            }
-        },
-        {
-            "path": "pages/ShouYi",
-            "style": {
-                "navigationBarTitleText": "广告收益"
-            }
-        },
-        {
-            "path": "pages/EditPwd",
-            "style": {
-                "navigationBarTitleText": "修改密码"
-            }
-        },
-        {
-            "path": "pages/JieSuanJiLu",
-            "style": {
-                "navigationBarTitleText": "结算记录"
-            }
-        },
-        {
-            "path": "pages/TiXian",
-            "style": {
-                "navigationBarTitleText": "提现"
-            }
-        },
-        {
-            "path": "pages/MyBalance",
-            "style": {
-                "navigationBarTitleText": "我的账单"
-            }
-        },
-        {
-            "path": "pages/InvoiceInfo",
-            "style": {
-                "navigationBarTitleText": "查看发票"
-            }
-        },
-        {
-            "path": "pages/InvoiceInfo1",
-            "style": {
-                "navigationBarTitleText": "查看发票"
-            }
-        }
-    ],
-    "window": {
-        "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#fff",
-        "navigationBarTitleText": "票盟云",
-        "navigationBarTextStyle": "black",
-        "backgroundColor": "#eeeeee"
+    {
+      "path": "pages/Billing",
+      "style": {
+        "navigationBarTitleText": "开票"
+      }
     },
-    "tabBar": {
-        "color": "#B3AEA9",
-        "selectedColor": "#1FA4FC",
-        "borderStyle": "black",
-        "backgroundColor": "#ffffff",
-        "position": "bottom",
-        "list": [{
-                "pagePath": "pages/Index",
-                "iconPath": "static/image/home.png",
-                "selectedIconPath": "static/image/home1.png",
-                "text": "首页"
-            },
-            {
-                "pagePath": "pages/My",
-                "iconPath": "static/image/my.png",
-                "selectedIconPath": "static/image/my1.png",
-                "text": "我的"
-            }
-        ]
+    {
+      "path": "pages/WaitingDetails",
+      "style": {
+        "navigationBarTitleText": "待开详情"
+      }
     },
-    "globalStyle": {
-        "navigationBarTextStyle": "black",
-        "navigationBarTitleText": "uni-app",
-        "navigationBarBackgroundColor": "#F8F8F8",
-        "backgroundColor": "#F8F8F8",
-        "usingComponents": {
-            "van-button": "/wxcomponents/vant/button/index",
-            "van-icon": "/wxcomponents/vant/icon/index",
-            "van-field": "/wxcomponents/vant/field/index",
-            "van-grid": "/wxcomponents/vant/grid/index",
-            "van-grid-item": "/wxcomponents/vant/grid-item/index",
-            "van-tabs": "/wxcomponents/vant/tabs/index",
-            "van-tab": "/wxcomponents/vant/tab/index",
-            "van-submit-bar": "/wxcomponents/vant/submit-bar/index",
-            "van-radio-group": "/wxcomponents/vant/radio-group/index",
-            "van-radio": "/wxcomponents/vant/radio/index",
-            "van-picker": "/wxcomponents/vant/picker/index",
-            "van-popup": "/wxcomponents/vant/popup/index",
-            "van-stepper": "/wxcomponents/vant/stepper/index",
-            "van-empty": "/wxcomponents/vant/empty/index",
-            "van-search": "/wxcomponents/vant/search/index",
-            "van-dialog": "/wxcomponents/vant/dialog/index",
-            "van-row": "/wxcomponents/vant/row/index",
-            "van-col": "/wxcomponents/vant/col/index",
-            "van-cell": "/wxcomponents/vant/cell/index"
-        }
+    {
+      "path": "pages/Red",
+      "style": {
+        "navigationBarTitleText": "冲红发票"
+      }
+    },
+    {
+      "path": "pages/Billed",
+      "style": {
+        "navigationBarTitleText": "已开票"
+      }
+    },
+    {
+      "path": "pages/Login",
+      "style": {
+        "navigationBarTitleText": "票盟云"
+      }
+    },
+    {
+      "path": "pages/Open",
+      "style": {
+        "navigationBarTitleText": "选择套餐"
+      }
+    },
+    {
+      "path": "pages/My",
+      "style": {
+        "navigationBarTitleText": "我的"
+      }
+    },
+    {
+      "path": "pages/ShouYi",
+      "style": {
+        "navigationBarTitleText": "广告收益"
+      }
+    },
+    {
+      "path": "pages/EditPwd",
+      "style": {
+        "navigationBarTitleText": "修改密码"
+      }
+    },
+    {
+      "path": "pages/JieSuanJiLu",
+      "style": {
+        "navigationBarTitleText": "结算记录"
+      }
+    },
+    {
+      "path": "pages/TiXian",
+      "style": {
+        "navigationBarTitleText": "提现"
+      }
+    },
+    {
+      "path": "pages/MyBalance",
+      "style": {
+        "navigationBarTitleText": "我的账单"
+      }
+    },
+    {
+      "path": "pages/InvoiceInfo",
+      "style": {
+        "navigationBarTitleText": "查看发票"
+      }
+    },
+    {
+      "path": "pages/InvoiceInfo1",
+      "style": {
+        "navigationBarTitleText": "查看发票"
+      }
+    },
+    {
+      "path": "pages/ShangHu",
+      "style": {
+        "navigationBarTitleText": "创建开票员"
+      }
+    },
+    {
+      "path": "pages/AddShangHu",
+      "style": {
+        "navigationBarTitleText": "创建开票员"
+      }
     }
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "票盟云",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#eeeeee"
+  },
+  "tabBar": {
+    "color": "#B3AEA9",
+    "selectedColor": "#1FA4FC",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "position": "bottom",
+    "list": [
+      {
+        "pagePath": "pages/Index",
+        "iconPath": "static/image/home.png",
+        "selectedIconPath": "static/image/home1.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/My",
+        "iconPath": "static/image/my.png",
+        "selectedIconPath": "static/image/my1.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8",
+    "usingComponents": {
+      "van-button": "/wxcomponents/vant/button/index",
+      "van-icon": "/wxcomponents/vant/icon/index",
+      "van-field": "/wxcomponents/vant/field/index",
+      "van-grid": "/wxcomponents/vant/grid/index",
+      "van-grid-item": "/wxcomponents/vant/grid-item/index",
+      "van-tabs": "/wxcomponents/vant/tabs/index",
+      "van-tab": "/wxcomponents/vant/tab/index",
+      "van-submit-bar": "/wxcomponents/vant/submit-bar/index",
+      "van-radio-group": "/wxcomponents/vant/radio-group/index",
+      "van-radio": "/wxcomponents/vant/radio/index",
+      "van-picker": "/wxcomponents/vant/picker/index",
+      "van-popup": "/wxcomponents/vant/popup/index",
+      "van-stepper": "/wxcomponents/vant/stepper/index",
+      "van-empty": "/wxcomponents/vant/empty/index",
+      "van-search": "/wxcomponents/vant/search/index",
+      "van-dialog": "/wxcomponents/vant/dialog/index",
+      "van-row": "/wxcomponents/vant/row/index",
+      "van-col": "/wxcomponents/vant/col/index",
+      "van-cell": "/wxcomponents/vant/cell/index",
+      "van-switch": "/wxcomponents/vant/switch/index"
+    }
+  }
 }
