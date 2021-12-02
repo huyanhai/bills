@@ -1,0 +1,25 @@
+{
+    "name": "user-h5",
+    "version": "0.0.0",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "serve": "vite prediv"
+    },
+    "dependencies": {
+        "axios": "^0.23.0",
+        "clipboard-copy": "^4.0.1",
+        "global": "^4.4.0",
+        "vant": "^3.2.5",
+        "vue": "^3.2.16",
+        "vue-router": "^4.0.12",
+        "weixin-js-sdk": "^1.6.0"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-vue": "^1.9.3",
+        "autoprefixer": "^10.3.7",
+        "postcss-pxtorem": "^6.0.0",
+        "sass": "^1.43.2",
+        "vite": "^2.6.4"
+    }
+}

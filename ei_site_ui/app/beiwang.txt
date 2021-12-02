@@ -1,0 +1,23 @@
+https://modao.cc/app/1a965f3f4ea8d8071b4ee811d020aa216d0f9dc2?simulator_type=device&sticky#screen=skreo9jkdmnvllu
+
+  "tabBar": {
+    "color": "#B3AEA9",
+    "selectedColor": "#1FA4FC",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "position": "bottom",
+    "list": [
+      {
+        "pagePath": "pages/Index",
+        "iconPath": "static/image/home.png",
+        "selectedIconPath": "static/image/home1.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/Index",
+        "iconPath": "static/image/my.png",
+        "selectedIconPath": "static/image/my1.png",
+        "text": "我的"
+      }
+    ]
+  },

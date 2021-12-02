@@ -1,0 +1,260 @@
+{
+    "pages": [{
+            "path": "pages/Index",
+            "style": {
+                "navigationBarTitleText": "票盟云"
+            }
+        },
+        {
+            "path": "pages/Login",
+            "style": {
+                "navigationBarTitleText": "票盟云"
+            }
+        },
+        {
+            "path": "pages/My",
+            "style": {
+                "navigationBarTitleText": "我的"
+            }
+        },
+        {
+            "path": "pages/MyCode",
+            "style": {
+                "navigationBarTitleText": "我的码牌"
+            }
+        },
+        {
+            "path": "pages/BindCode",
+            "style": {
+                "navigationBarTitleText": "创建商户"
+            }
+        },
+        {
+            "path": "pages/BindCode1",
+            "style": {
+                "navigationBarTitleText": "设置开票信息"
+            }
+        },
+        {
+            "path": "pages/BindCode2",
+            "style": {
+                "navigationBarTitleText": "上传图片"
+            }
+        },
+        {
+            "path": "pages/BindCode3",
+            "style": {
+                "navigationBarTitleText": "绑定码牌"
+            }
+        },
+        {
+            "path": "pages/MyShop",
+            "style": {
+                "navigationBarTitleText": "我的商户"
+            }
+        },
+        {
+            "path": "pages/BindShop",
+            "style": {
+                "navigationBarTitleText": "配置商户开票商品"
+            }
+        },
+        {
+            "path": "pages/ShopDetails",
+            "style": {
+                "navigationBarTitleText": "商户详情"
+            }
+        },
+        {
+            "path": "pages/ShopInfos",
+            "style": {
+                "navigationBarTitleText": "商户详情"
+            }
+        },
+        {
+            "path": "pages/Device",
+            "style": {
+                "navigationBarTitleText": "税控设备"
+            }
+        },
+        {
+            "path": "pages/JiHuo",
+            "style": {
+                "navigationBarTitleText": "激活商户"
+            }
+        },
+        {
+            "path": "pages/ShouYi",
+            "style": {
+                "navigationBarTitleText": "收益记录"
+            }
+        },
+        {
+            "path": "pages/EditPwd",
+            "style": {
+                "navigationBarTitleText": "修改密码"
+            }
+        },
+        {
+            "path": "pages/TiXian",
+            "style": {
+                "navigationBarTitleText": "提现"
+            }
+        },
+        {
+            "path": "pages/ZhangHu",
+            "style": {
+                "navigationBarTitleText": "对公账户"
+            }
+        },
+        {
+            "path": "pages/SetAccount",
+            "style": {
+                "navigationBarTitleText": "设置对公账户"
+            }
+        },
+        {
+            "path": "pages/MyBalance",
+            "style": {
+                "navigationBarTitleText": "我的账单"
+            }
+        },
+        {
+            "path": "pages/MyJiLu",
+            "style": {
+                "navigationBarTitleText": "提现记录"
+            }
+        },
+        {
+            "path": "pages/FenPei",
+            "style": {
+                "navigationBarTitleText": "发票分配"
+            }
+        },
+        {
+            "path": "pages/TuiJian",
+            "style": {
+                "navigationBarTitleText": "推荐合伙人"
+            }
+        },
+        {
+            "path": "pages/BindHehuoren",
+            "style": {
+                "navigationBarTitleText": "成为合伙人"
+            }
+        },
+        {
+            "path": "pages/Hehuoren",
+            "style": {
+                "navigationBarTitleText": "合伙人"
+            }
+        },
+        {
+            "path": "pages/AddOrder",
+            "style": {
+                "navigationBarTitleText": "安装订单"
+            }
+        },
+        {
+            "path": "pages/HelpMe",
+            "style": {
+                "navigationBarTitleText": "帮我安装"
+            }
+        },
+        {
+            "path": "pages/AdShouYi",
+            "style": {
+                "navigationBarTitleText": "广告收益"
+            }
+        },
+        {
+            "path": "pages/JieSuanJiLu",
+            "style": {
+                "navigationBarTitleText": "结算记录"
+            }
+        },
+        {
+            "path": "pages/YiChang",
+            "style": {
+                "navigationBarTitleText": "异常订单"
+            }
+        },
+        {
+            "path": "pages/WebView",
+            "style": {
+                "navigationBarTitleText": ""
+            }
+        },
+        {
+            "path": "pages/Billed",
+            "style": {
+                "navigationBarTitleText": "蓝票"
+            }
+        },
+        {
+            "path": "pages/Red",
+            "style": {
+                "navigationBarTitleText": "红票"
+            }
+        }
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "票盟云",
+        "navigationBarTextStyle": "black",
+        "backgroundColor": "#eeeeee"
+    },
+    "tabBar": {
+        "color": "#B3AEA9",
+        "selectedColor": "#1FA4FC",
+        "borderStyle": "black",
+        "backgroundColor": "#ffffff",
+        "position": "bottom",
+        "list": [{
+                "pagePath": "pages/Index",
+                "iconPath": "static/image/home1.png",
+                "selectedIconPath": "static/image/home.png",
+                "text": "首页"
+            },
+            {
+                "pagePath": "pages/My",
+                "iconPath": "static/image/my1.png",
+                "selectedIconPath": "static/image/my.png",
+                "text": "我的"
+            }
+        ]
+    },
+    "globalStyle": {
+        "navigationBarTextStyle": "black",
+        "navigationBarTitleText": "uni-app",
+        "navigationBarBackgroundColor": "#F8F8F8",
+        "backgroundColor": "#F8F8F8",
+        "usingComponents": {
+            "van-button": "/wxcomponents/vant/button/index",
+            "van-icon": "/wxcomponents/vant/icon/index",
+            "van-field": "/wxcomponents/vant/field/index",
+            "van-grid": "/wxcomponents/vant/grid/index",
+            "van-grid-item": "/wxcomponents/vant/grid-item/index",
+            "van-tabs": "/wxcomponents/vant/tabs/index",
+            "van-tab": "/wxcomponents/vant/tab/index",
+            "van-submit-bar": "/wxcomponents/vant/submit-bar/index",
+            "van-col": "/wxcomponents/vant/col/index",
+            "van-row": "/wxcomponents/vant/row/index",
+            "van-radio-group": "/wxcomponents/vant/radio-group/index",
+            "van-radio": "/wxcomponents/vant/radio/index",
+            "van-uploader": "/wxcomponents/vant/uploader/index",
+            "van-picker": "/wxcomponents/vant/picker/index",
+            "van-popup": "/wxcomponents/vant/popup/index",
+            "van-search": "/wxcomponents/vant/search/index",
+            "van-dialog": "/wxcomponents/vant/dialog/index",
+            "van-empty": "/wxcomponents/vant/empty/index",
+            "van-checkbox-group": "/wxcomponents/vant/checkbox-group/index",
+            "van-checkbox": "/wxcomponents/vant/checkbox/index",
+            "van-cell-group": "/wxcomponents/vant/cell-group/index",
+            "van-cell": "/wxcomponents/vant/cell/index",
+            "van-area": "/wxcomponents/vant/area/index",
+            "van-tag": "/wxcomponents/vant/tag/index"
+        }
+    }
+}
