@@ -7,11 +7,11 @@
         </view>
       </van-col>
       <van-col span="12">
-        <view class="user_name_view">{{ data.agentName }}</view>
-        <view class="user_no_view">账号:{{ data.phone }}</view>
+        <view class="user_name_view">{{ account.name }}</view>
+        <view class="user_no_view">账号:{{ account.phone }}</view>
       </van-col>
     </van-row>
-    <view class="data_detail_view">
+    <view class="data_detail_view" v-if="account.accountType === 1">
       <van-row>
         <van-col span="12">
           <view class="right_data">
@@ -33,7 +33,7 @@
     </view>
     <view class="operation_view">
       <van-cell @click="goPath('ShangHu')" title="开票员管理" is-link :icon="require('../static/image/income.png')" v-if="account.accountType === 1" />
-      <van-cell @click="goPath('ShouYi')" title="广告收益" is-link :icon="require('../static/image/income.png')" />
+      <van-cell @click="goPath('ShouYi')" title="广告收益" is-link :icon="require('../static/image/income.png')" v-if="account.accountType === 1" />
       <van-cell @click="goPath('EditPwd')" title="修改密码" is-link :icon="require('../static/image/update.png')" />
       <van-cell @click="logout" title="退出登录" is-link :icon="require('../static/image/crew.png')" />
     </view>

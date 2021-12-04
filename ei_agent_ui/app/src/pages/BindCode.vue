@@ -97,6 +97,7 @@
         label="支持专票"
         :disabled="true"
         :required="true"
+        placeholder="请选择是否支持专票"
       >
         <van-icon name="arrow-down" />
       </CInput>

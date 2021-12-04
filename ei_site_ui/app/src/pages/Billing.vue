@@ -62,6 +62,7 @@ export default {
     },
     changeSearch(e) {
       this.page = 1;
+      this.list = [];
       this.getData();
     },
     goPage(item) {

@@ -16,15 +16,11 @@
         </view>
         <view class="item">
           <view class="col-l">税控设备类型</view>
-          <view class="col-r">{{ data.taxPanelType === '1' ? 'U_KEY' : '税盘' }}</view>
+          <view class="col-r">{{ data.taxPanelType === 1 ? 'U_KEY' : '税盘' }}</view>
         </view>
         <view class="item">
           <view class="col-l">法人</view>
           <view class="col-r">{{ data.legalPerson || '' }}</view>
-        </view>
-        <view class="item">
-          <view class="col-l">复核人</view>
-          <view class="col-r">{{ data.checker || '' }}</view>
         </view>
         <view class="item">
           <view class="col-l">地址</view>
@@ -36,7 +32,7 @@
         </view>
         <view class="item">
           <view class="col-l">行业</view>
-          <view class="col-r">{{ data.industryCategory === '0' ? '餐饮' : '酒店' }}</view>
+          <view class="col-r">{{ data.industryCategory === 0 ? '餐饮' : '酒店' }}</view>
         </view>
         <view class="item">
           <view class="col-l">创建时间</view>
@@ -146,7 +142,7 @@ export default {
       align-items: center;
       justify-content: space-between;
       font-size: 24rpx;
-      line-height: 80rpx;
+      line-height: 60rpx;
       .col-l {
         color: rgba($color: #000000, $alpha: 0.7);
       }

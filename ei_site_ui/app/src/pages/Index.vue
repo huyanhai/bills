@@ -2,7 +2,7 @@
   <view class="page-index">
     <view class="card">
       <view class="title">{{ shopInfo.siteName }}</view>
-      <view class="jifen">到期时间{{ shopInfo.expireTime }}</view>
+      <view class="jifen" v-if="shopInfo.expireTime">到期时间:{{ (shopInfo.expireTime || "").split(" ")[0] }}</view>
       <view class="m-op">
         <view class="col-l">
           <view class="name">普通发票</view>
@@ -122,9 +122,12 @@ export default {
       const { data } = await get("site/login/site/info");
       if (data) {
         this.shopInfo = data;
-        const time = new Date(data.expireTime).getTime();
-        const today = new Date().getTime();
-        if (today > time) {
+        // const time = new Date(data.expireTime).getTime();
+        // const today = new Date().getTime();
+        // if (today > time) {
+        //   this.showModel();
+        // }
+        if (!data.expireTime) {
           this.showModel();
         }
       }
@@ -133,13 +136,13 @@ export default {
       uni.showModal({
         title: "你的账号未激活",
         content: "你的账号未激活，将不能开票",
-        cancelText: "取消",
-        confirmText: "去开通",
+        // cancelText: "取消",
+        confirmText: "确定",
         success(res) {
           if (res.confirm) {
-            uni.navigateTo({
-              url: "Open",
-            });
+            // uni.navigateTo({
+            //   url: "Open",
+            // });
           } else if (res.cancel) {
           }
         },

@@ -12,7 +12,7 @@
       <Card :paddingTop="false" v-for="item in pageData" :key="item.id">
         <view class="infos">
           <view class="item">
-            <view class="col-l">发票 类 型</view>
+            <view class="col-l">发票类型</view>
             <view class="col-r">{{ invoiceTypeCode1[item.invoiceTypeCode] }} </view>
           </view>
           <view class="item">
@@ -120,6 +120,7 @@ export default {
     },
     fenpei(item) {
       this.activeItem = item;
+      this.purchaseSize = item.purchaseSize;
       this.show1 = true;
     },
     async dialogConfirm() {

@@ -96,6 +96,11 @@ const apps = {
       let { code, msg } = await get("p/send/sms/code", {
         mobile: this.form.phone,
       });
+      if (code === 6) {
+        this.changImg();
+        this.show = true;
+        return;
+      }
       if (code === 0) {
         this.countDown();
       } else {
@@ -129,15 +134,19 @@ const apps = {
       }
     },
     getMsg() {
-      if (!this.form.phone) return;
+      if (!this.form.phone) {
+        return uni.showToast({
+          title: "手机号为空",
+          icon: "none",
+        });
+      }
       if (!checkPhone(this.form.phone)) {
         return uni.showToast({
           title: "手机格式不对",
           icon: "none",
         });
       }
-      this.changImg();
-      this.show = true;
+      this.getCode();
     },
   },
   components: {

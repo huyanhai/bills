@@ -94,13 +94,13 @@
     {
       "path": "pages/ShangHu",
       "style": {
-        "navigationBarTitleText": "创建开票员"
+        "navigationBarTitleText": "开票员管理"
       }
     },
     {
       "path": "pages/AddShangHu",
       "style": {
-        "navigationBarTitleText": "创建开票员"
+        "navigationBarTitleText": "新增开票员"
       }
     }
   ],

@@ -28,9 +28,21 @@
       </view>
     </view>
 
-    <van-dialog use-slot :show="show" show-cancel-button @confirm="dialogConfirm" :overlay="true" @cancel="show = false">
+    <van-dialog
+      use-slot
+      :show="show"
+      show-cancel-button
+      @confirm="dialogConfirm"
+      :overlay="true"
+      @cancel="show = false"
+    >
       <view class="dialog-box">
-        <CInput :value.sync="editInfo.taxRate" placeholder="请输入税收编码" label="税收编码" use-button-slot>
+        <CInput
+          :value.sync="editInfo.taxRate"
+          placeholder="请输入税收编码"
+          label="税收编码"
+          use-button-slot
+        >
           %
         </CInput>
       </view>
@@ -74,7 +86,7 @@ export default {
         title: '',
         content: '确定删除?',
         confirmText: '删除',
-        success: async function (res) {
+        success: async function(res) {
           if (res.confirm) {
             const { data } = await get('agent/goods/delete', {
               goodsId: id,
@@ -98,18 +110,22 @@ export default {
       if (!this.editInfo.taxRate) {
         return uni.showToast({
           title: '税率为空',
+          icon: 'none',
         });
       }
-      const { data } = await post('agent/goods/update', {
+      const { code, data } = await post('agent/goods/update', {
         id: this.editInfo.id,
         taxRate: `${this.editInfo.taxRate}`,
       });
-      if (data) {
+      if (code === 0) {
         uni.showToast({
           title: '修改成功',
+          icon: 'none',
         });
-        this.getGoods();
         this.show = false;
+        setTimeout(() => {
+          this.getGoods();
+        }, 1000);
       }
     },
     async getGoods() {

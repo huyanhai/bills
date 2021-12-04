@@ -98,7 +98,7 @@
         />
         <van-grid-item
           :icon="require('../static/image/yc.png')"
-          text="异常订单"
+          text="异常开票"
           @click="goPath('YiChang')"
         />
       </van-grid>
