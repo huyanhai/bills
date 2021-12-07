@@ -15,6 +15,13 @@
         </view>
         <text>门头照</text>
       </view>
+      <view class="col-l">
+        <view class="uploads" @click="uploads(3)">
+          <image :src="form.taxImage" mode="" v-if="form.taxImage" />
+          <image src="../static/image/upload.png" v-else />
+        </view>
+        <text>税盘照片</text>
+      </view>
     </view>
     <CInput
       :value.sync="name"
@@ -197,6 +204,7 @@ export default {
         specialInvoiceText: '',
         licenseUrl: '',
         shopImage: '',
+        taxImage: '',
         servicePhone: '',
       },
       infos: {
@@ -219,6 +227,7 @@ export default {
         specialInvoiceText: '支持专票',
         licenseUrl: '营业执照',
         shopImage: '门头照',
+        taxImage: '税盘照片',
         servicePhone: '客服电话',
       },
       isEdit: false,
@@ -292,6 +301,7 @@ export default {
         this.form.licenseUrl = data.licenseUrl;
         this.form.shopImage = data.shopImage;
         this.form.servicePhone = data.servicePhone;
+        this.form.taxImage = data.taxImage;
         delete this.form.phone;
       }
     },
@@ -381,6 +391,8 @@ export default {
                   break;
                 case 2:
                   that.form.shopImage = data;
+                case 3:
+                  that.form.taxImage = data;
                   break;
                 default:
                   break;
