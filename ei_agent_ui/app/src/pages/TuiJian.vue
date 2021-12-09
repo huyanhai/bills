@@ -2,6 +2,13 @@
   <view class="page-login">
     <view class="form">
       <CInput :value.sync="form.agentName" placeholder="请输入姓名" label="姓名" />
+      <CityPicker
+        placeholder="请输入地址"
+        label="地址"
+        @pickerInfo="pickerInfo"
+        :required="false"
+      />
+      <CInput :value.sync="form.address" placeholder="请输入详细地址" label="详细地址"></CInput>
       <CInput :value.sync="form.phone" placeholder="请输入手机号" label="手机号">
         <view class="get link" @click="getMsg" v-if="!showCount">{{ msg }}</view>
         <view class="get" v-else>{{ time }}s</view>
@@ -43,6 +50,8 @@ import { post, get } from '../../libs/request';
 import CInput from '../components/CInput.vue';
 import { BASE_URL } from '../../config/index';
 import { checkPhone } from '../../libs/utils';
+import CityPicker from '../components/CityPicker.vue';
+
 const apps = {
   data() {
     return {
@@ -51,6 +60,10 @@ const apps = {
         phone: '',
         password: '',
         smsCode: '',
+        address: '',
+        provinceId: '',
+        cityId: '',
+        countyId: '',
       },
       validateCode: '',
       show: false,
@@ -65,6 +78,12 @@ const apps = {
   },
   onload() {},
   methods: {
+    pickerInfo(e) {
+      const [one, two, three] = e;
+      this.form.provinceId = one?.id;
+      this.form.cityId = two?.id;
+      this.form.countyId = three?.id;
+    },
     changImg() {
       const time = new Date().valueOf();
       this.imgUrl = `${BASE_URL}p/permit/authcode/${this.form.phone}/?${time}`;
@@ -144,6 +163,7 @@ const apps = {
   },
   components: {
     CInput,
+    CityPicker,
   },
 };
 export default apps;
@@ -211,5 +231,11 @@ export default apps;
       width: 100%;
     }
   }
+}
+.van-field__label--disabled {
+  color: #646566 !important;
+}
+.van-field__control--disabled {
+  color: #323233 !important;
 }
 </style>

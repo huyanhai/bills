@@ -69,7 +69,7 @@
         <van-grid-item
           :icon="require('../static/image/install.png')"
           text="码牌安装"
-          @click="show = true"
+          @click="goPath('BindCode')"
         />
         <van-grid-item
           :icon="require('../static/image/site.png')"
@@ -88,14 +88,14 @@
         />
         <van-grid-item
           :icon="require('../static/image/tj.png')"
-          text="推荐合伙人"
-          @click="goPath('TuiJian')"
+          text="我的下级"
+          @click="goPath('TuiJianList')"
         />
-        <van-grid-item
+        <!-- <van-grid-item
           :icon="require('../static/image/jh.png')"
           text="安装订单"
           @click="goPath('AddOrder')"
-        />
+        /> -->
         <van-grid-item
           :icon="require('../static/image/yc.png')"
           text="异常开票"

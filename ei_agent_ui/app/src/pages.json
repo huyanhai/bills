@@ -135,7 +135,13 @@
     {
       "path": "pages/TuiJian",
       "style": {
-        "navigationBarTitleText": "推荐合伙人"
+        "navigationBarTitleText": "新增下级"
+      }
+    },
+    {
+      "path": "pages/TuiJianList",
+      "style": {
+        "navigationBarTitleText": "我的下级"
       }
     },
     {

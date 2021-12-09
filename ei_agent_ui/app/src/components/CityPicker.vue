@@ -5,7 +5,7 @@
         :value.sync="value"
         :placeholder="placeholder"
         :label="label"
-        :required="true"
+        :required="required"
         :disabled="true"
       />
     </view>
@@ -44,6 +44,10 @@ export default {
     customClass: {
       type: String,
       default: '',
+    },
+    required: {
+      type: Boolean,
+      default: true,
     },
   },
   components: {
@@ -159,6 +163,6 @@ export default {
   color: #646566 !important;
 }
 .van-field__control--disabled {
-  color: #323233;
+  color: #323233 !important;
 }
 </style>
