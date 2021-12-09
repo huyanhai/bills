@@ -87,7 +87,13 @@
     {
       "path": "pages/ShouYi",
       "style": {
-        "navigationBarTitleText": "收益记录"
+        "navigationBarTitleText": "开户奖励"
+      }
+    },
+    {
+      "path": "pages/ShangHuTongJi",
+      "style": {
+        "navigationBarTitleText": "商户统计"
       }
     },
     {

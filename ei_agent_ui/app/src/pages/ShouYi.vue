@@ -6,24 +6,20 @@
           <Card :paddingTop="false" v-for="item in pageData" :key="item.id">
             <view class="infos">
               <view class="item">
-                <view class="col-l">订单号</view>
-                <view class="col-r">{{ item.orderId }}</view>
+                <view class="col-l">状态</view>
+                <view class="col-r" style="color:red">{{ status[item.status] }}</view>
               </view>
               <view class="item">
-                <view class="col-l">交易金额</view>
-                <view class="col-r">{{ item.money }}</view>
-              </view>
-              <view class="item">
-                <view class="col-l">收益金额</view>
-                <view class="col-r">{{ item.openAccountProfit }}元</view>
-              </view>
-              <view class="item">
-                <view class="col-l">商户名称</view>
+                <view class="col-l"> 商户名称</view>
                 <view class="col-r">{{ item.siteName }}</view>
               </view>
-              <view class="item" v-if="item.menuTime">
-                <view class="col-l">套餐时间</view>
-                <view class="col-r">{{ item.menuTime }}年</view>
+              <view class="item">
+                <view class="col-l">奖励金额</view>
+                <view class="col-r">{{ item.money || '0' }}元</view>
+              </view>
+              <view class="item">
+                <view class="col-l">开票量</view>
+                <view class="col-r">{{ item.number || '' }}</view>
               </view>
               <view class="item">
                 <view class="col-l">时间</view>
@@ -37,15 +33,15 @@
             <view class="infos">
               <view class="item">
                 <view class="col-l">状态</view>
-                <view class="col-r">{{ settlement[item.settlement] }}</view>
+                <view class="col-r" style="color:red">{{ status[item.status] }}</view>
               </view>
               <view class="item">
-                <view class="col-l">角色</view>
-                <view class="col-r">{{ rule[item.agentRole] }}</view>
+                <view class="col-l">净增数</view>
+                <view class="col-r">{{ item.number - item.basis }}</view>
               </view>
               <view class="item">
-                <view class="col-l">收益金额</view>
-                <view class="col-r">+{{ item.money }}元</view>
+                <view class="col-l">奖励金额</view>
+                <view class="col-r">{{ item.money }}</view>
               </view>
               <view class="item">
                 <view class="col-l">时间</view>
@@ -74,18 +70,18 @@ export default {
     return {
       titleList: [
         {
-          name: '开户收益',
+          name: '开户奖励',
           value: 1,
         },
         {
-          name: '推荐收益',
+          name: '净增奖励',
           value: 2,
         },
       ],
       page: 1,
       limit: 100,
       pageData: {},
-      settlement: {
+      status: {
         1: '未结算',
         2: '已结算',
       },
@@ -96,13 +92,13 @@ export default {
         4: '城市合伙人',
       },
       typeValue: {
-        name: '开户收益',
+        name: '开户奖励',
         value: 1,
       },
     };
   },
   onShow() {
-    this.getData('agent/site_open_account_profit/page');
+    this.getData('agent/site_qualified_profit/page');
   },
   methods: {
     openShop() {},
@@ -117,9 +113,9 @@ export default {
       this.pageData = data;
     },
     itemChange(e) {
-      let url = 'agent/site_open_account_profit/page';
+      let url = 'agent/site_qualified_profit/page';
       if (e.value === 2) {
-        url = 'agent/recommend_account_profit/page';
+        url = 'agent/site_net_rewards/page';
       }
       this.typeValue = e;
       this.getData(url);

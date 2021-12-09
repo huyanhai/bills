@@ -1,12 +1,18 @@
 <template>
   <view class="tabs">
     <view class="tab-hd">
-      <view class="title" :style="{width:`calc(100% / ${titleList.length})`}" :class="{ active: active === item.value }"
-        v-for="(item) in titleList" :key="item.value" @click="tabItemChange(item)">
+      <view
+        class="title"
+        :style="{ width: `calc(100% / ${titleList.length})` }"
+        :class="{ active: active === item.value }"
+        v-for="item in titleList"
+        :key="item.value"
+        @click="tabItemChange(item)"
+      >
         {{ item.name }}
       </view>
     </view>
-    <scroll-view class="tab-bd" scroll-y>
+    <scroll-view class="tab-bd" scroll-y :class="{ 'no-padding': noPadding }">
       <slot></slot>
     </scroll-view>
   </view>
@@ -17,21 +23,25 @@ export default {
   props: {
     titleList: {
       type: Array,
-      default: () => []
-    }
+      default: () => [],
+    },
+    noPadding: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
-      active: 1
-    }
+      active: 1,
+    };
   },
   methods: {
     tabItemChange(item) {
-      this.active = item.value
-      this.$emit('itemChange', item)
-    }
-  }
-}
+      this.active = item.value;
+      this.$emit('itemChange', item);
+    },
+  },
+};
 </script>
 
 <style lang="scss">
@@ -75,6 +85,9 @@ export default {
     min-height: 20vh;
     box-sizing: border-box;
     padding: 30rpx 30rpx 98rpx 30rpx;
+    &.no-padding {
+      padding: 0;
+    }
   }
 }
 </style>

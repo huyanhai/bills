@@ -78,8 +78,13 @@
         />
         <van-grid-item
           :icon="require('../static/image/sy.png')"
-          text="开户收益"
+          text="开户奖励"
           @click="goPath('ShouYi')"
+        />
+        <van-grid-item
+          :icon="require('../static/image/jh.png')"
+          text="商户统计"
+          @click="goPath('ShangHuTongJi')"
         />
         <van-grid-item
           :icon="require('../static/image/zh.png')"
@@ -91,11 +96,6 @@
           text="我的下级"
           @click="goPath('TuiJianList')"
         />
-        <!-- <van-grid-item
-          :icon="require('../static/image/jh.png')"
-          text="安装订单"
-          @click="goPath('AddOrder')"
-        /> -->
         <van-grid-item
           :icon="require('../static/image/yc.png')"
           text="异常开票"
