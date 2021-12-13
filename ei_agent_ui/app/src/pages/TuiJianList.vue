@@ -21,7 +21,7 @@
         </view>
         <view class="item" style="border-top:1px solid #dedede;justify-content: flex-end;">
           <view class="col-l">
-            <van-button type="info" size="mini" @click="jihuo(item)">激活</van-button>
+            <van-button type="info" size="small" @click="jihuo(item)">激活</van-button>
           </view>
         </view>
       </view>
@@ -43,7 +43,7 @@
           </van-radio>
         </van-radio-group>
         <view class="tips">
-          <view class="money">费用:￥{{ changeItem.money }}</view>
+          <view class="money">软件服务费:￥{{ changeItem.money }}</view>
           <view class="info">{{ changeItem.describe }}</view>
         </view>
       </view>

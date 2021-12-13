@@ -5,7 +5,7 @@
     </view>
     <view class="search">
       <van-search :value="search" label="搜索" placeholder="请输入公司名称或税号" use-action-slot @change="changeVal" @search="changeSearch">
-        <view slot="action" @click="getData">搜索</view>
+        <view slot="action" @click="changeSearch">搜索</view>
       </van-search>
     </view>
     <scroll-view class="tab-bd" scroll-y @scrolltolower="scrolltolower" :style="{ height: screenHeight + 'px' }">

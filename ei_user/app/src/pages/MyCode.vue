@@ -136,7 +136,7 @@ export default {
         align-items: center;
         justify-content: space-between;
         font-size: 24rpx;
-        line-height: 80rpx;
+        line-height: 60rpx;
         .red {
           color: red;
         }

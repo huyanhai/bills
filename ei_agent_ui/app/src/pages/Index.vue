@@ -82,14 +82,14 @@
           @click="goPath('ShouYi')"
         />
         <van-grid-item
-          :icon="require('../static/image/jh.png')"
-          text="商户统计"
-          @click="goPath('ShangHuTongJi')"
-        />
-        <van-grid-item
           :icon="require('../static/image/zh.png')"
           text="广告收益"
           @click="goPath('AdShouYi')"
+        />
+        <van-grid-item
+          :icon="require('../static/image/jh.png')"
+          text="商户统计"
+          @click="goPath('ShangHuTongJi')"
         />
         <van-grid-item
           :icon="require('../static/image/tj.png')"

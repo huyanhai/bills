@@ -20,7 +20,9 @@
           </div>
           <div class="more-layer more-layer1">
             <van-field v-model="qiye.title" label="发票抬头" :required="true" placeholder="发票抬头" @input="inputVal">
-              <van-icon name="arrow-down" />
+              <template #right-icon>
+                <img :src="getAssets('../static/image/fp.png')" @click="getList" class="more-info-img" />
+              </template>
             </van-field>
             <div class="layer" v-if="showLayer">
               <div class="lay-item" v-for="item in list" :key="item.taxNo" @click="setItem(item)">
@@ -76,6 +78,9 @@
           v-if="item === 2"
         />
       </van-popup>
+      <van-popup :show="show1" position="bottom" :close-on-click-overlay="false">
+        <van-picker :columns="companyList" @confirm="confirmItem1" @cancel="show1 = false" show-toolbar value-key="title" />
+      </van-popup>
     </div>
     <div v-else class="null-box">
       <van-empty :image="getAssets('../static/image/logo.png')" />
@@ -128,6 +133,8 @@ export default {
       getAssets: getAssets,
       orderNumber: null,
       qrCode: null,
+      companyList: [],
+      show1: false,
     };
   },
   components: {
@@ -164,6 +171,27 @@ export default {
     }
   },
   methods: {
+    confirmItem1(e) {
+      if (this.updateType.value === 1) {
+        this.qiye = Object.assign(this.qiye, e);
+      } else {
+        this.geren.title = e.detail.value.title;
+      }
+      this.show1 = false;
+    },
+    async getList() {
+      const { code, data } = await post(`wechat/user_history_company/page`, {
+        page: 1,
+        limit: 100,
+        searchModel: {
+          type: this.updateType.value,
+        },
+      });
+      if (code === 0) {
+        this.companyList = data;
+        this.show1 = true;
+      }
+    },
     async getCompany() {
       const vm = this;
       const { code, data } = await get(`wechat/get/latest/company`);
@@ -351,6 +379,11 @@ export default {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  .more-info-img {
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+  }
   .box1 {
     flex: 1 0 auto;
     height: 50%;

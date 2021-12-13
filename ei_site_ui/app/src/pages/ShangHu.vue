@@ -1,6 +1,6 @@
 <template>
   <view class="page-jihuo">
-    <van-button type="info" class="ui-btn" @click="goPath('AddShangHu')">新增商户</van-button>
+    <van-button type="info" class="ui-btn" @click="goPath('AddShangHu')">新增开票员</van-button>
     <template v-if="pageData.length > 0">
       <scroll-view scroll-y :style="{ height: screenHeight + 'px' }">
         <Card :paddingTop="false" v-for="item in pageData" :key="item.id">

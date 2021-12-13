@@ -391,6 +391,7 @@ export default {
                   break;
                 case 2:
                   that.form.shopImage = data;
+                  break;
                 case 3:
                   that.form.taxImage = data;
                   break;
@@ -482,19 +483,20 @@ export default {
     position: absolute;
     background: #dedede;
     z-index: 100;
-    padding: 30rpx;
-    left: 0;
+    padding: 10rpx;
+    left: 0rpx;
     right: 0;
     display: flex;
     flex-direction: column;
     max-height: 500rpx;
     overflow-y: scroll;
     top: 80rpx;
+    overflow: hidden;
     .lay-item {
       height: 60rpx;
       line-height: 60rpx;
       font-size: 28rpx;
-      margin-bottom: 20rpx;
+      overflow: hidden;
     }
   }
 }

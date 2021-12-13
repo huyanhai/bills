@@ -430,7 +430,7 @@ export default {
       position: absolute;
       background: #dedede;
       z-index: 100;
-      padding: 30rpx;
+      padding: 10rpx;
       left: 0;
       right: 0;
       display: flex;
@@ -441,7 +441,6 @@ export default {
         height: 60rpx;
         line-height: 60rpx;
         font-size: 28rpx;
-        margin-bottom: 20rpx;
       }
     }
   }

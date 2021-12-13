@@ -32,7 +32,7 @@
       </van-row>
     </view>
     <view class="operation_view">
-      <van-cell @click="goPath('ShangHu')" title="开票员管理" is-link :icon="require('../static/image/income.png')" v-if="account.accountType === 1" />
+      <van-cell @click="goPath('ShangHu')" title="开票人员" is-link :icon="require('../static/image/my1.png')" v-if="account.accountType === 1" />
       <van-cell @click="goPath('ShouYi')" title="广告收益" is-link :icon="require('../static/image/income.png')" v-if="account.accountType === 1" />
       <van-cell @click="goPath('EditPwd')" title="修改密码" is-link :icon="require('../static/image/update.png')" />
       <van-cell @click="logout" title="退出登录" is-link :icon="require('../static/image/crew.png')" />
