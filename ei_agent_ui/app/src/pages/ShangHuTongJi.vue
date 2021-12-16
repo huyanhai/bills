@@ -16,27 +16,28 @@
       <view class="box">
         <template v-if="pageData.length > 0">
           <template v-if="typeValue.value === 1">
-            <Card :paddingTop="false" v-for="item in pageData" :key="item.id">
-              <view class="infos">
+            <Card :paddingTop="false" v-for="item in pageData" :key="item.siteId">
+              <view class="infos rows">
+                <view class="foot">{{ item.siteName }}</view>
                 <view class="item">
-                  <view class="col-l">发票类型</view>
-                  <view class="col-r">{{ invoiceType[item.invoiceType] }}</view>
+                  <view class="col-l">本月开票{{ item.number }}</view>
                 </view>
                 <view class="item">
-                  <view class="col-l"> 商户名称</view>
-                  <view class="col-r">{{ item.siteName }}</view>
+                  <view class="col-l">本月开票金额{{ item.money }}</view>
                 </view>
                 <view class="item">
-                  <view class="col-l">开票金额</view>
-                  <view class="col-r">{{ item.money || '0' }}元</view>
+                  <view class="col-l">本月冲红{{ item.redNumber }}</view>
                 </view>
                 <view class="item">
-                  <view class="col-l">开票数量</view>
-                  <view class="col-r">{{ item.number }}</view>
+                  <view class="col-l">本月冲红金额{{ item.redMoney }}</view>
                 </view>
-                <view class="item">
-                  <view class="col-l">开票时间</view>
-                  <view class="col-r">{{ item.outInvoiceTime || '' }}</view>
+                <view class="foot">
+                  <van-button type="info" size="small" @click="tongji(item.siteId, 1)">
+                    开票统计
+                  </van-button>
+                  <van-button type="info" size="small" @click="tongji(item.siteId, 2)">
+                    冲红统计
+                  </van-button>
                 </view>
               </view>
             </Card>
@@ -103,18 +104,22 @@ export default {
         name: '商户开票统计',
         value: 1,
       },
-      url: 'agent/site_day_invoice/page',
+      url: 'agent/site_info/monthly/invoice/statistical/page',
       search: '',
     };
   },
   onShow() {
-    this.url = 'agent/site_day_invoice/page';
+    this.url = 'agent/site_info/monthly/invoice/statistical/page';
     this.getData();
   },
   methods: {
+    tongji(item, type) {
+      uni.navigateTo({
+        url: `ShangHuTongJiDetails?siteId=${item}&type=${type}`,
+      });
+    },
     changeSearch(e) {
       this.page = 1;
-
       this.getData();
     },
     changeVal(e) {
@@ -122,18 +127,22 @@ export default {
     },
     openShop() {},
     async getData() {
+      let searchModel = {};
+      if (this.typeValue.value === 1) {
+        searchModel = { company: this.search };
+      } else {
+        searchModel = { id: this.search };
+      }
       const { data } = await post(this.url, {
         page: this.page,
         limit: this.limit,
-        searchModel: {
-          id: this.search,
-        },
+        searchModel: searchModel,
       });
       this.pageData = data;
     },
     itemChange(e) {
       this.search = '';
-      this.url = 'agent/site_day_invoice/page';
+      this.url = 'agent/site_info/monthly/invoice/statistical/page';
       if (e.value === 2) {
         this.url = 'agent/site_qualified_statistical/page';
       }
@@ -154,6 +163,20 @@ export default {
     margin-bottom: 30rpx;
   }
   .infos {
+    &.rows {
+      display: flex;
+      flex-wrap: wrap;
+      .item {
+        width: 50%;
+      }
+      .foot {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin: 20rpx 0;
+        font-size: 30rpx;
+      }
+    }
     .item {
       display: flex;
       align-items: center;

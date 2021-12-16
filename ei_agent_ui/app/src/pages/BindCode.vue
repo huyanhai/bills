@@ -37,7 +37,6 @@
         placeholder="请输入公司名称全称"
         label="公司名称"
         :required="true"
-        @input="getTitle"
       />
       <view class="layer" v-if="showLayer">
         <view class="lay-item" v-for="item in list" :key="item.taxNo" @click="setItem(item)">
@@ -362,8 +361,11 @@ export default {
         imageUrl: url,
       });
       if (code === 0) {
-        this.form.legalPerson = data.legalPerson;
         this.form.title = data.name;
+        if (data.name === '*') {
+          this.form.title = data.legalPerson;
+        }
+        this.form.legalPerson = data.legalPerson;
         this.form.taxNo = data.registerNumber;
       }
     },

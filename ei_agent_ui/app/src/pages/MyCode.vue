@@ -8,10 +8,27 @@
           bindscrolltolower="onQueryByPage"
           class="my-code"
         >
-          <view class="code-box" v-for="item in codeList" :key="item.id">
-            <view class="col-l">{{ item.codeId }}</view>
-            <view class="col-r">{{ item.siteName || '' }}</view>
-          </view>
+          <Card :paddingTop="false" v-for="item in codeList" :key="item.id">
+            <view class="infos">
+              <view class="item">
+                <view class="col-l">编号</view>
+                <view class="col-r">{{ item.codeId }}</view>
+              </view>
+              <view class="item">
+                <view class="col-l">商户名称</view>
+                <view class="col-r">{{ item.siteName || '' }}</view>
+              </view>
+              <view
+                class="item"
+                style="border-top:1px solid #dedede;justify-content: flex-end;"
+                v-if="item.siteId"
+              >
+                <view class="col-l" style="padding-bottom:10rpx">
+                  <van-button type="info" size="small" @click="jiebang(item)">解绑</van-button>
+                </view>
+              </view>
+            </view>
+          </Card>
         </scroll-view>
       </van-tab>
       <van-tab title="码牌入库" name="2">
@@ -56,6 +73,27 @@ export default {
     };
   },
   methods: {
+    jiebang(item) {
+      const _this = this;
+      uni.showModal({
+        content: `商户名称为${item.siteName}，绑定码牌为${item.codeId}，确认解除绑定?`,
+        confirmText: '解绑',
+        cancelText: '取消',
+        success: async function(res) {
+          if (res.confirm) {
+            const { data } = await get('agent/code/unbundling', {
+              codeId: item.codeId,
+            });
+            if (data) {
+              uni.showToast({
+                title: '解绑成功',
+              });
+              _this.getMyCode();
+            }
+          }
+        },
+      });
+    },
     async getMyCode() {
       const { data } = await post('agent/sys_code_card/page', {
         page: this.page,
@@ -131,6 +169,45 @@ export default {
 </script>
 
 <style lang="scss">
+.page-mycode {
+  min-height: 100vh;
+  background: #eee;
+  .m-card {
+    margin-bottom: 30rpx;
+  }
+  .infos {
+    .item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 24rpx;
+      line-height: 80rpx;
+      .col-l {
+        color: rgba($color: #000000, $alpha: 0.7);
+      }
+      .red {
+        color: red;
+      }
+      .l {
+        .uploads {
+          width: 180rpx;
+          height: 180rpx;
+          image {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+      &.last-item {
+        justify-content: flex-start;
+        .l {
+          margin-right: 30rpx;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
 .box {
   box-sizing: border-box;
   padding: 30rpx;

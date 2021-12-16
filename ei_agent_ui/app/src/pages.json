@@ -97,6 +97,12 @@
       }
     },
     {
+      "path": "pages/ShangHuTongJiDetails",
+      "style": {
+        "navigationBarTitleText": "重庆票盟云科技有限公司日开票统计"
+      }
+    },
+    {
       "path": "pages/EditPwd",
       "style": {
         "navigationBarTitleText": "修改密码"
@@ -268,7 +274,8 @@
       "van-cell-group": "/wxcomponents/vant/cell-group/index",
       "van-cell": "/wxcomponents/vant/cell/index",
       "van-area": "/wxcomponents/vant/area/index",
-      "van-tag": "/wxcomponents/vant/tag/index"
+      "van-tag": "/wxcomponents/vant/tag/index",
+      "van-datetime-picker": "/wxcomponents/vant/datetime-picker/index"
     }
   }
 }
