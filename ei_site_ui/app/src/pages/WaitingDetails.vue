@@ -11,9 +11,13 @@
           <view class="col-l">公司税号</view>
           <view class="col-r">{{ invoice.buyerTaxNo || "" }}</view>
         </view>
-        <view class="item">
+        <!-- <view class="item">
           <view class="col-l">发票类型</view>
           <view class="col-r" :class="{ red: invoice.invoiceTypeCode === 28 }">{{ invoiceTypeCode[invoice.invoiceTypeCode] || "" }}</view>
+        </view> -->
+        <view class="item">
+          <view class="col-l">开票类型</view>
+          <view class="col-r" style="color:red">{{ buyerInvoiceType[invoice.buyerInvoiceType] }}</view>
         </view>
         <view class="item">
           <view class="col-l">用户提交金额</view>
@@ -44,8 +48,15 @@
     <Card class="m-input">
       <view class="infos">
         <view class="item">
+          <view class="col-l" @click="show1 = true">
+            <CInput label="类型" titlew="100rpx" :value.sync="form.invoiceTypeName" placeholder="请选择类型" :disabled="true" :required="true">
+              <van-icon name="arrow" />
+            </CInput>
+          </view>
+        </view>
+        <view class="item">
           <view class="col-l" @click="show = true">
-            <CInput label="类型" titlew="100rpx" :value.sync="form.goods_name" placeholder="请选择类型" :disabled="true" :required="true">
+            <CInput label="商品" titlew="100rpx" :value.sync="form.goods_name" placeholder="请选择商品" :disabled="true" :required="true">
               <van-icon name="arrow" />
             </CInput>
           </view>
@@ -79,6 +90,9 @@
     <van-popup :show="show" position="bottom" :close-on-click-overlay="false">
       <van-picker :columns="goodsList" @confirm="confirmItem" @cancel="show = false" show-toolbar value-key="goods_name" />
     </van-popup>
+    <van-popup :show="show1" position="bottom" :close-on-click-overlay="false">
+      <van-picker :columns="goodsList1" @confirm="confirmItem1" @cancel="show1 = false" show-toolbar value-key="invoiceTypeName" />
+    </van-popup>
   </view>
 </template>
 
@@ -94,6 +108,8 @@ export default {
       invoice: {},
       show: false,
       form: {
+        invoiceTypeCode: "",
+        invoiceTypeName: "",
         goods_name: "",
         goodsId: "",
         price: "",
@@ -110,6 +126,12 @@ export default {
         1: "企业",
         2: "个人",
       },
+      buyerInvoiceType: {
+        1: "专票",
+        2: "普票",
+      },
+      show1: false,
+      goodsList1: [],
     };
   },
   components: {
@@ -123,8 +145,18 @@ export default {
       this.getInvoice();
     }
     this.getGoods();
+    this.getGoods1();
   },
   methods: {
+    async getGoods1() {
+      const { data } = await get("site/query/site/invoice_type", {
+        invoiceId: this.id,
+      });
+      if (data) {
+        this.goodsList1 = data;
+      }
+    },
+
     onChange(e) {
       this.form.number = e?.detail;
     },
@@ -149,6 +181,11 @@ export default {
       this.form.goodsId = e?.detail?.value?.id;
       this.form.goods_name = e?.detail?.value?.goods_name;
       this.show = false;
+    },
+    confirmItem1(e) {
+      this.form.invoiceTypeCode = e?.detail?.value?.invoiceTypeCode;
+      this.form.invoiceTypeName = e?.detail?.value?.invoiceTypeName;
+      this.show1 = false;
     },
     cancel() {
       const vm = this;
@@ -177,6 +214,14 @@ export default {
       }
     },
     async onSubmit() {
+      if (this.form.invoiceTypeCode === 4 || this.form.invoiceTypeCode === 7) {
+        return uni.showModal({
+          content: "纸票请到Pc端开具",
+          showCancel: false,
+          confirmText: "好的",
+          success: function(res) {},
+        });
+      }
       const { code } = await post("site/get/invoice", {
         ...this.form,
         invoiceId: this.id,

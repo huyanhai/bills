@@ -20,16 +20,16 @@
               <view class="infos rows">
                 <view class="foot">{{ item.siteName }}</view>
                 <view class="item">
-                  <view class="col-l">本月开票{{ item.number }}</view>
+                  <view class="col-l">本月开票:{{ item.number }}</view>
                 </view>
                 <view class="item">
-                  <view class="col-l">本月开票金额{{ item.money }}</view>
+                  <view class="col-l">本月开票金额:{{ item.money }}</view>
                 </view>
                 <view class="item">
-                  <view class="col-l">本月冲红{{ item.redNumber }}</view>
+                  <view class="col-l">本月冲红:{{ item.redNumber }}</view>
                 </view>
                 <view class="item">
-                  <view class="col-l">本月冲红金额{{ item.redMoney }}</view>
+                  <view class="col-l">本月冲红金额:{{ item.redMoney }}</view>
                 </view>
                 <view class="foot">
                   <van-button type="info" size="small" @click="tongji(item.siteId, 1)">
@@ -182,7 +182,7 @@ export default {
       align-items: center;
       justify-content: space-between;
       font-size: 24rpx;
-      line-height: 80rpx;
+      line-height: 60rpx;
       .col-l {
         color: rgba($color: #000000, $alpha: 0.7);
       }

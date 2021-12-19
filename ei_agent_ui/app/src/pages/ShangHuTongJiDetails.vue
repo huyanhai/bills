@@ -5,6 +5,7 @@
         :value="search"
         label="搜索"
         placeholder="请选择时间"
+        disabled
         @change="changeVal"
         @search="changeSearch"
       ></van-search>
@@ -34,7 +35,13 @@
       </template>
       <van-empty description="暂无数据" v-else />
       <van-popup :show="show" position="bottom" bind:close="onClose">
-        <van-datetime-picker :value="currentDate" type="date" title="选择月日" @confirm="confirm" />
+        <van-datetime-picker
+          :value="currentDate"
+          type="date"
+          title="选择月日"
+          @confirm="confirm"
+          @cancel="show = false"
+        />
       </van-popup>
     </view>
   </view>
@@ -147,7 +154,7 @@ export default {
       align-items: center;
       justify-content: space-between;
       font-size: 24rpx;
-      line-height: 80rpx;
+      line-height: 60rpx;
       .col-l {
         color: rgba($color: #000000, $alpha: 0.7);
       }

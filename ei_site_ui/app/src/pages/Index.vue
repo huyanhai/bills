@@ -5,11 +5,11 @@
       <view class="jifen" v-if="shopInfo.expireTime">到期时间:{{ (shopInfo.expireTime || "").split(" ")[0] }}</view>
       <view class="m-op">
         <view class="col-l">
-          <view class="name">普通发票</view>
+          <view class="name">电子普票</view>
           <view class="num">{{ blankInvoice.valueAddedElectroniceInvoice || 0 }}</view>
         </view>
         <view class="col-l">
-          <view class="name">专用发票</view>
+          <view class="name">电子专票</view>
           <view class="num">{{ blankInvoice.vatSpecialElectroniceInvoice || 0 }}</view>
         </view>
       </view>
@@ -36,7 +36,11 @@
         </van-grid-item>
       </van-grid>
     </Card>
-    <Card title="开票功能">
+    <Card>
+      <view class="kaip-items">
+        <view class="col-l">开票:￥{{ statisticalp.money }}</view>
+        <view class="col-r">冲红:￥{{ statisticalp.redMoney }}</view>
+      </view>
       <van-grid direction="vertical" column-num="3" class="m-grid" :border="false">
         <van-grid-item :icon="require('../static/image/kp.png')" text="待开票" @click="goPage('0')" :badge="waitingNum" />
         <van-grid-item :icon="require('../static/image/kp.png')" text="已开票" @click="goPage('1')" />
@@ -60,6 +64,7 @@ export default {
       blankInvoice: {},
       timer: null,
       statistical: {},
+      statisticalp: {},
     };
   },
   onShow() {
@@ -78,6 +83,7 @@ export default {
     this.getBlank();
     this.getWaiting();
     this.getStatistical();
+    this.getStatisticalPage();
     this.timer = setInterval(() => {
       this.getWaiting();
     }, 20000);
@@ -95,6 +101,13 @@ export default {
     }
   },
   methods: {
+    titleClick() {
+      console.log("titleClick");
+    },
+    async getStatisticalPage() {
+      const { data } = await get("site/site_info/monthly/invoice/statistical/page");
+      this.statisticalp = data;
+    },
     async getStatistical() {
       const { data } = await get("site/login/statistical");
       this.statistical = data;
@@ -165,6 +178,14 @@ export default {
   min-height: 100vh;
   padding: 30rpx;
   background: #eee;
+  .kaip-items {
+    display: flex;
+    justify-content: space-between;
+    font-size: 28rpx;
+    border-bottom: 1px solid rgba($color: #000, $alpha: 0.1);
+    padding-bottom: 20rpx;
+    color: rgb(94, 94, 94);
+  }
   .card {
     width: 100%;
     background: black;

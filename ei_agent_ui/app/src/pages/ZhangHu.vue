@@ -91,7 +91,7 @@ export default {
       align-items: center;
       justify-content: space-between;
       font-size: 24rpx;
-      line-height: 80rpx;
+      line-height: 60rpx;
       .col-l {
         color: rgba($color: #000000, $alpha: 0.7);
       }

@@ -42,14 +42,14 @@
       >
         开票信息
       </van-button>
-      <van-button
+      <!-- <van-button
         v-if="item.state !== 1"
         type="info"
         size="small"
         @click="goBind('BindCode2', item.id)"
       >
         营业执照
-      </van-button>
+      </van-button> -->
       <van-button
         v-if="item.state !== 1"
         type="info"

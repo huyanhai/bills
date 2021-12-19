@@ -1,6 +1,6 @@
 <template>
   <view class="m-card">
-    <view class="title" v-if="title">
+    <view class="title" v-if="title" @click="$emit('titleClick')">
       <view class="col-l">{{ title }}</view>
       <view class="col-r" v-if="titleRight">{{ titleRight }}</view>
     </view>

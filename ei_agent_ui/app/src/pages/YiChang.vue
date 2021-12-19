@@ -10,6 +10,11 @@
                 <view class="col-r blue">{{ state[item.state] }}</view>
               </view>
               <view class="item">
+                <view class="col-l">销方信息</view>
+                <view class="col-r">{{ item.sellerTitle }}</view>
+              </view>
+
+              <view class="item">
                 <view class="col-l">{{ item.buyerType === 2 ? '姓名' : '购方抬头' }}</view>
                 <view class="col-r">{{ item.buyerTitle }}</view>
               </view>
@@ -119,7 +124,7 @@ export default {
       align-items: center;
       justify-content: space-between;
       font-size: 24rpx;
-      line-height: 80rpx;
+      line-height: 60rpx;
       .col-l {
         color: rgba($color: #000000, $alpha: 0.7);
       }

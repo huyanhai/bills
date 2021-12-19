@@ -97,7 +97,7 @@
         <van-icon name="arrow-down" />
       </CInput>
     </view>
-    <view @click="showItem(3)">
+    <!-- <view @click="showItem(3)">
       <CInput
         :value.sync="form.specialInvoiceText"
         label="支持专票"
@@ -107,7 +107,7 @@
       >
         <van-icon name="arrow-down" />
       </CInput>
-    </view>
+    </view> -->
     <CInput
       :value.sync="form.servicePhone"
       placeholder="请输入客服电话"
@@ -199,8 +199,8 @@ export default {
         taxPanelTypeText: 'U_KEY',
         industryCategory: '0',
         industryCategoryText: '餐饮',
-        specialInvoice: '',
-        specialInvoiceText: '',
+        // specialInvoice: '',
+        // specialInvoiceText: '',
         licenseUrl: '',
         shopImage: '',
         taxImage: '',
@@ -294,7 +294,7 @@ export default {
         this.form.industryCategory = String(data.industryCategory || 0);
         this.form.industryCategoryText = this.hyType[data.industryCategory];
         this.form.specialInvoice = String(data.specialInvoice || 1);
-        this.form.specialInvoiceText = data.specialInvoice === 1 ? '支持' : '不支持';
+        // this.form.specialInvoiceText = data.specialInvoice === 1 ? '支持' : '不支持';
         this.form.siteId = data.id;
         this.name = data.siteName;
         this.form.licenseUrl = data.licenseUrl;
