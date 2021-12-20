@@ -9,9 +9,9 @@
       <text v-if="infoData.state === 7">红票验签中</text>
     </view>
     <van-button type="info" @click="goPath(`${to}?id=${id}`)" class="btn">查看明细</van-button>
-    <van-button type="info" v-if="[2, 4].includes(infoData.state)" @click="show1 = true" class="btn">发票下载</van-button>
+    <van-button type="info" v-if="[2].includes(infoData.state) || [7, 4].includes(infoData.invoiceTypeCode)" @click="show1 = true" class="btn">发票下载</van-button>
     <template v-if="infoData.state === 2">
-      <van-button type="primary" @click="show = true" class="btn" v-if="[2, 4].includes(infoData.state)">发送至邮箱</van-button>
+      <van-button type="primary" @click="show = true" class="btn" v-if="[2].includes(infoData.state) || [7, 4].includes(infoData.invoiceTypeCode)">发送至邮箱</van-button>
       <van-button type="danger" class="btn" @click="confirm">
         冲红
       </van-button>

@@ -14,7 +14,7 @@
             </view>
             <view class="item">
               <view class="col-l">交易时间</view>
-              <view class="col-r">{{ item.profitsTime }}</view>
+              <view class="col-r">{{ splitTime(item.profitsTime) }}</view>
             </view>
           </view>
         </Card>
@@ -48,6 +48,12 @@ export default {
     this.getData();
   },
   methods: {
+    splitTime(value) {
+      if (value) {
+        return value.split(" ")[0];
+      }
+      return "";
+    },
     scrolltolower() {
       if (this.pageData.length < this.pageLength) {
         this.page++;

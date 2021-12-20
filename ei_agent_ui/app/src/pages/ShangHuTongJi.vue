@@ -20,10 +20,10 @@
               <view class="infos rows">
                 <view class="foot">{{ item.siteName }}</view>
                 <view class="item">
-                  <view class="col-l">本月开票:{{ item.number }}</view>
+                  <view class="col-l">本月开票:{{ item.number }}张</view>
                 </view>
                 <view class="item">
-                  <view class="col-l">本月开票金额:{{ item.money }}</view>
+                  <view class="col-l">本月开票金额:{{ item.money }}元</view>
                 </view>
                 <view class="item">
                   <view class="col-l">本月冲红:{{ item.redNumber }}</view>
@@ -47,11 +47,11 @@
               <view class="infos">
                 <view class="item">
                   <view class="col-l">商户数</view>
-                  <view class="col-r">{{ item.number }}</view>
+                  <view class="col-r">{{ item.number }}户</view>
                 </view>
                 <view class="item">
                   <view class="col-l">时间</view>
-                  <view class="col-r">{{ item.time }}</view>
+                  <view class="col-r">{{ splitTime(item.time) }}</view>
                 </view>
               </view>
             </Card>
@@ -113,6 +113,12 @@ export default {
     this.getData();
   },
   methods: {
+    splitTime(value) {
+      if (value) {
+        return value.split(' ')[0];
+      }
+      return '';
+    },
     tongji(item, type) {
       uni.navigateTo({
         url: `ShangHuTongJiDetails?siteId=${item}&type=${type}`,

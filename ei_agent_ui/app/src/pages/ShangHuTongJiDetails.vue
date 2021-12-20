@@ -28,7 +28,7 @@
             </view>
             <view class="item">
               <view class="col-l">开票时间</view>
-              <view class="col-r">{{ item.outInvoiceTime || '' }}</view>
+              <view class="col-r">{{ splitTime(item.outInvoiceTime) || '' }}</view>
             </view>
           </view>
         </Card>
@@ -95,6 +95,12 @@ export default {
     this.getData();
   },
   methods: {
+    splitTime(value) {
+      if (value) {
+        return value.split(' ')[0];
+      }
+      return '';
+    },
     // formatter(type, value) {
     //   if (type === 'year') {
     //     return `${value}年`;

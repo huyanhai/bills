@@ -16,7 +16,7 @@
             </view>
             <view class="item">
               <view class="col-l">交易时间</view>
-              <view class="col-r">{{ item.estimateDate }}</view>
+              <view class="col-r">{{ splitTime(item.estimateDate) }}</view>
             </view>
           </view>
         </Card>
@@ -61,6 +61,12 @@ export default {
     this.getData('agent/agent_estimate/page');
   },
   methods: {
+    splitTime(value) {
+      if (value) {
+        return value.split(' ')[0];
+      }
+      return '';
+    },
     openShop() {},
     async getData(url) {
       const { data } = await post(url, {
