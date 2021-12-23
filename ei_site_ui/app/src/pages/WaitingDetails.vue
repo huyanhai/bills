@@ -154,6 +154,8 @@ export default {
       });
       if (data) {
         this.goodsList1 = data;
+        this.form.invoiceTypeName = data[0].invoiceTypeName;
+        this.form.invoiceTypeCode = data[0].invoiceTypeCode;
       }
     },
 
