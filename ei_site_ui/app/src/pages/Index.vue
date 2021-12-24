@@ -5,12 +5,20 @@
       <view class="jifen" v-if="shopInfo.expireTime">到期时间:{{ (shopInfo.expireTime || "").split(" ")[0] }}</view>
       <view class="m-op">
         <view class="col-l">
-          <view class="name">电子普票</view>
+          <view class="name">普通电票</view>
           <view class="num">{{ blankInvoice.valueAddedElectroniceInvoice || 0 }}</view>
         </view>
         <view class="col-l">
-          <view class="name">电子专票</view>
+          <view class="name">专用电票</view>
           <view class="num">{{ blankInvoice.vatSpecialElectroniceInvoice || 0 }}</view>
+        </view>
+        <view class="col-l">
+          <view class="name">普通纸票</view>
+          <view class="num">{{ blankInvoice.vatSpecialInvoice || 0 }}</view>
+        </view>
+        <view class="col-l">
+          <view class="name">专用纸票</view>
+          <view class="num">{{ blankInvoice.valueAddedTaxInvoice || 0 }}</view>
         </view>
       </view>
     </view>
@@ -38,8 +46,8 @@
     </Card>
     <Card>
       <view class="kaip-items">
-        <view class="col-l">开票:￥{{ statisticalp.money }}</view>
-        <view class="col-r">冲红:￥{{ statisticalp.redMoney }}</view>
+        <view class="col-l">月开票:￥{{ statisticalp.money }}</view>
+        <view class="col-r">月冲红:￥{{ statisticalp.redMoney }}</view>
       </view>
       <van-grid direction="vertical" column-num="3" class="m-grid" :border="false">
         <van-grid-item :icon="require('../static/image/kp.png')" text="待开票" @click="goPage('0')" :badge="waitingNum" />

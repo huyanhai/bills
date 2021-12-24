@@ -15,10 +15,10 @@
           <view class="col-l">发票类型</view>
           <view class="col-r" :class="{ red: invoice.invoiceTypeCode === 28 }">{{ invoiceTypeCode[invoice.invoiceTypeCode] || "" }}</view>
         </view> -->
-        <view class="item">
+        <!-- <view class="item">
           <view class="col-l">开票类型</view>
           <view class="col-r" style="color:red">{{ buyerInvoiceType[invoice.buyerInvoiceType] }}</view>
-        </view>
+        </view> -->
         <view class="item">
           <view class="col-l">用户提交金额</view>
           <view class="col-r" style="color:red">{{ invoice.money }}元</view>
@@ -154,6 +154,8 @@ export default {
       });
       if (data) {
         this.goodsList1 = data;
+        this.form.invoiceTypeName = data[0].invoiceTypeName;
+        this.form.invoiceTypeCode = data[0].invoiceTypeCode;
       }
     },
 

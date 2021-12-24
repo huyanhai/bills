@@ -74,6 +74,13 @@
       :required="true"
     />
     <CInput
+      v-if="form.taxPanelType === '2'"
+      :value.sync="form.taxPassword"
+      placeholder="请输入税盘口令"
+      label="税盘口令"
+      :required="true"
+    />
+    <CInput
       :value.sync="form.legalPerson"
       placeholder="请输入法人姓名"
       label="法人姓名"
@@ -152,6 +159,7 @@
         v-if="item === 3"
       />
     </van-popup>
+    <van-dialog id="van-dialog" />
   </view>
 </template>
 
@@ -162,6 +170,8 @@ import { get, post } from '../../libs/request';
 import CityPicker from '../components/CityPicker.vue';
 import { checkPhone } from '../../libs/utils';
 import { BASE_URL } from '../../config';
+import Dialog from '../wxcomponents/vant/dialog/dialog';
+
 export default {
   data() {
     return {
@@ -172,7 +182,7 @@ export default {
       show1: false,
       columns1: [
         { id: 1, name: 'U_KEY' },
-        { id: 2, name: '税控盘' },
+        { id: 2, name: '百望税控盘' },
       ],
       columns2: [
         { id: 0, name: '餐饮' },
@@ -197,6 +207,7 @@ export default {
         phone: '',
         taxPanelType: '1',
         taxPanelTypeText: 'U_KEY',
+        taxPassword: '',
         industryCategory: '0',
         industryCategoryText: '餐饮',
         // specialInvoice: '',
@@ -220,6 +231,7 @@ export default {
         phone: '商户手机号',
         taxPanelType: '税盘类型',
         taxPanelTypeText: '税盘类型',
+        taxPassword: '税盘口令',
         industryCategory: '行业类型',
         industryCategoryText: '行业类型',
         specialInvoice: '支持专票',
@@ -289,6 +301,7 @@ export default {
         this.form.taxNo = data.siteTaxNo;
         this.form.taxPanelType = String(data.taxPanelType || 1);
         this.form.taxPanelTypeText = data.taxPanelType === 1 ? 'U_KEY' : '税控盘';
+        this.form.taxPassword = data.taxPassword;
         this.form.machineCode = data.machineCode;
         this.form.legalPerson = data.legalPerson;
         this.form.industryCategory = String(data.industryCategory || 0);
@@ -305,8 +318,16 @@ export default {
       }
     },
     async onSubmit() {
+      const vm = this;
       for (let item in this.form) {
-        if (!this.form[item]) {
+        if (!this.form[item] && item === 'taxPassword' && this.form.taxPanelType === '2') {
+          return uni.showToast({
+            title: `${this.keyMap[item]}为空,请完善数据`,
+            duration: 2000,
+            icon: 'none',
+          });
+        }
+        if (!this.form[item] && item !== 'taxPassword') {
           return uni.showToast({
             title: `${this.keyMap[item]}为空,请完善数据`,
             duration: 2000,
@@ -320,7 +341,22 @@ export default {
         });
       }
       const url = this.isEdit ? 'agent/up/site/account' : 'agent/add/site/account';
-      const { code, msg, data } = await post(url, this.form);
+      if (this.form.taxPanelType === '2') {
+        Dialog.confirm({
+          title: '核对税盘口令',
+          message: `${this.form.taxPassword}`,
+        })
+          .then(async () => {
+            this.tijiao(url, vm.form);
+          })
+          .catch(() => {});
+      } else {
+        this.form.taxPassword = '';
+        this.tijiao(url, this.form);
+      }
+    },
+    async tijiao(url, form) {
+      const { code, msg, data } = await post(url, form);
       if (code === 0) {
         if (this.isEdit) {
           return uni.showToast({
@@ -413,6 +449,9 @@ export default {
 </script>
 
 <style lang="scss">
+.van-dialog__message-text {
+  color: red;
+}
 .form {
   width: 100%;
   box-sizing: border-box;
