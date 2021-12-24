@@ -32,41 +32,11 @@
           </template>
         </t-input>
       </t-form-item>
-
-      <div class="check-container remember-pwd">
-        <t-checkbox>记住账号</t-checkbox>
-        <span class="tip">忘记账号？</span>
-      </div>
-    </template>
-
-    <!-- 扫码登陆 -->
-    <template v-else-if="type == 'qrcode'">
-      <div class="tip-container">
-        <span class="tip">请使用微信扫一扫登录</span>
-        <span class="refresh">刷新 <t-icon name="refresh" /> </span>
-      </div>
-      <qrcode-vue value="" :size="192" level="H" />
-    </template>
-
-    <!-- 手机号登陆 -->
-    <template v-else>
-      <t-form-item class="verification-code" name="verifyCode">
-        <t-input v-model="formData.verifyCode" size="large" placeholder="请输入验证码" />
-        <t-button variant="outline" :disabled="countDown > 0" @click="handleCounter">
-          {{ countDown == 0 ? '发送验证码' : `${countDown}秒后可重发` }}
-        </t-button>
-      </t-form-item>
     </template>
 
     <t-form-item v-if="type !== 'qrcode'" class="btn-container">
       <t-button block size="large" type="submit"> 登录 </t-button>
     </t-form-item>
-
-    <div class="switch-container">
-      <span v-if="type !== 'password'" class="tip" @click="switchType('password')">使用账号密码登录</span>
-      <span v-if="type !== 'qrcode'" class="tip" @click="switchType('qrcode')">使用微信扫码登录</span>
-      <span v-if="type !== 'phone'" class="tip" @click="switchType('phone')">使用手机号登录</span>
-    </div>
   </t-form>
 </template>
 
@@ -74,7 +44,6 @@
 import { defineComponent, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
-import QrcodeVue from 'qrcode.vue';
 import { MessagePlugin } from 'tdesign-vue-next';
 import { useCounter } from '@/hooks';
 
@@ -94,7 +63,7 @@ const FORM_RULES = {
 };
 
 export default defineComponent({
-  components: { QrcodeVue },
+  components: {},
   setup() {
     const type = ref('password');
 

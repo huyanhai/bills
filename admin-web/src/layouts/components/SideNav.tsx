@@ -158,11 +158,6 @@ export default defineComponent({
                   )}
                 </span>
               ),
-            operations: () => (
-              <span class="version-container">
-                {!this.collapsed && 'TDesign Starter'} {pgk.version}
-              </span>
-            ),
           }}
         >
           <menu-content navData={this.menu} />

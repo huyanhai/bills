@@ -3,7 +3,7 @@
 .light {
   &.login-wrapper {
     background-color: white;
-    background-image: url('@/assets/assets-login-bg-white.png');
+    background-image: url('@/assets/bg.png');
   }
 }
 
@@ -18,15 +18,17 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background-size: cover;
+  background-size: 10px;
   background-position: 100%;
   position: relative;
+  background-repeat: repeat;
 }
 
 .login-container {
   position: absolute;
-  top: 22%;
-  left: 5%;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
   min-height: 500px;
   line-height: 22px;
 }
@@ -190,14 +192,15 @@
 
 .copyright {
   font-size: 14px;
-  position:absolute;
-  left: 5%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   bottom: 64px;
   color: @text-color-secondary;
 }
 
 @media screen and (max-height: 700px) {
   .copyright {
-    display:none
+    display: none;
   }
 }

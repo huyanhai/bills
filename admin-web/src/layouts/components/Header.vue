@@ -18,25 +18,12 @@
           <!-- 搜索框 -->
           <search v-if="layout !== 'side'" :layout="layout" />
 
-          <!-- 全局通知 -->
-          <notice />
-
-          <t-tooltip placement="bottom" content="代码仓库">
-            <t-button theme="default" shape="square" variant="text" @click="navToGitHub">
-              <t-icon name="logo-github" />
-            </t-button>
-          </t-tooltip>
-          <t-tooltip placement="bottom" content="帮助文档">
-            <t-button theme="default" shape="square" variant="text" @click="navToHelper">
-              <t-icon name="help-circle" />
-            </t-button>
-          </t-tooltip>
           <t-dropdown :min-column-width="135" trigger="click">
             <template #dropdown>
               <t-dropdown-menu>
-                <t-dropdown-item class="operations-dropdown-container-item" @click="handleNav('/user/index')">
+                <!-- <t-dropdown-item class="operations-dropdown-container-item" @click="handleNav('/user/index')">
                   <t-icon name="user-circle"></t-icon>个人中心
-                </t-dropdown-item>
+                </t-dropdown-item> -->
                 <t-dropdown-item class="operations-dropdown-container-item" @click="handleLogout">
                   <t-icon name="poweroff"></t-icon>退出登录
                 </t-dropdown-item>
@@ -52,11 +39,6 @@
               </div>
             </t-button>
           </t-dropdown>
-          <t-tooltip placement="bottom" content="系统设置">
-            <t-button theme="default" shape="square" variant="text">
-              <t-icon name="setting" @click="toggleSettingPanel" />
-            </t-button>
-          </t-tooltip>
         </div>
       </template>
     </t-head-menu>
