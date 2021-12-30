@@ -1,4 +1,5 @@
 import { TOKEN_NAME } from '@/config/global';
+import { login } from '@/api';
 
 const InitUserInfo = {
   roles: [],
@@ -6,7 +7,7 @@ const InitUserInfo = {
 
 // 定义的state初始值
 const state = {
-  token: localStorage.getItem(TOKEN_NAME) || 'main_token', // 默认token不走权限
+  token: localStorage.getItem(TOKEN_NAME) || '', // 默认token不走权限
   userInfo: InitUserInfo,
 };
 
@@ -17,6 +18,7 @@ const mutations = {
   },
   removeToken(state) {
     localStorage.removeItem(TOKEN_NAME);
+    localStorage.removeItem('phone');
     state.token = '';
   },
   setUserInfo(state, userInfo) {
@@ -35,57 +37,19 @@ const getters = {
 
 const actions = {
   async login({ commit }, userInfo) {
-    const mockLogin = async (userInfo) => {
-      // 登录请求流程
-      console.log(userInfo);
-      // const { account, password } = userInfo;
-      // if (account !== 'td') {
-      //   return {
-      //     code: 401,
-      //     message: '账号不存在',
-      //   };
-      // }
-      // if (['main_', 'dev_'].indexOf(password) === -1) {
-      //   return {
-      //     code: 401,
-      //     message: '密码错误',
-      //   };
-      // }
-      // const token = {
-      //   main_: 'main_token',
-      //   dev_: 'dev_token',
-      // }[password];
-      return {
-        code: 200,
-        message: '登陆成功',
-        data: 'main_token',
-      };
-    };
-
-    const res = await mockLogin(userInfo);
-    if (res.code === 200) {
+    const res = await login(userInfo);
+    if ((res as any).code === 0) {
       commit('setToken', res.data);
+      localStorage.setItem('phone', userInfo.phone);
     } else {
-      throw res;
+      throw res.data;
     }
   },
-  async getUserInfo({ commit, state }) {
-    const mockRemoteUserInfo = async (token) => {
-      if (token === 'main_token') {
-        return {
-          name: 'td_main',
-          roles: ['ALL_ROUTERS'],
-        };
-      }
-      return {
-        name: 'td_dev',
-        roles: ['userIndex', 'dashboardBase', 'login'],
-      };
-    };
-
-    const res = await mockRemoteUserInfo(state.token);
-
-    commit('setUserInfo', res);
+  async getUserInfo({ commit }) {
+    commit('setUserInfo', {
+      name: 'td_main',
+      roles: ['ALL_ROUTERS'],
+    });
   },
   async logout({ commit }) {
     commit('removeToken');

@@ -1,10 +1,24 @@
 export const COLUMNS = [
   {
     title: '发票类型',
-    width: 80,
+    width: 120,
     ellipsis: true,
-    colKey: 'buyerInvoiceType',
-    cell: { col: 'buyerInvoiceType' },
+    colKey: 'invoiceTypeCode',
+    cell: { col: 'invoiceTypeCode' },
+  },
+  {
+    title: '发票编号',
+    width: 120,
+    ellipsis: true,
+    colKey: 'invoiceNo',
+    cell: { col: 'invoiceNo' },
+  },
+  {
+    title: '冲红发票编号',
+    width: 120,
+    ellipsis: true,
+    colKey: 'redInvoiceNo',
+    cell: { col: 'redInvoiceNo' },
   },
   {
     title: '购方类型',
@@ -29,7 +43,7 @@ export const COLUMNS = [
   },
   {
     title: '发票状态',
-    width: 80,
+    width: 120,
     ellipsis: true,
     colKey: 'state',
     cell: { col: 'state' },
@@ -38,15 +52,15 @@ export const COLUMNS = [
     title: '开票金额',
     width: 80,
     ellipsis: true,
-    colKey: 'money',
-    cell: { col: 'money' },
+    colKey: 'invoiceTotalPriceTax',
+    cell: { col: 'invoiceTotalPriceTax' },
   },
   {
-    title: '提交时间',
+    title: '开票时间',
     width: 200,
     ellipsis: true,
-    colKey: 'createTime',
-    cell: { col: 'createTime' },
+    colKey: 'outTime',
+    cell: { col: 'outTime' },
   },
   {
     align: 'left',

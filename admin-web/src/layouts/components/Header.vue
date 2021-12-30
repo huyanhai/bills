@@ -1,17 +1,6 @@
 <template>
   <div :class="layoutCls">
     <t-head-menu :class="menuCls" :theme="theme" expand-type="popup" :value="active">
-      <template #logo>
-        <span v-if="showLogo" class="header-logo-container" @click="handleNav('/dashboard/base')">
-          <tLogoFull class="t-logo" />
-        </span>
-        <div v-else class="header-operate-left">
-          <t-button theme="default" shape="square" variant="text" @click="changeCollapsed">
-            <t-icon class="collapsed-icon" name="view-list" />
-          </t-button>
-          <search :layout="layout" />
-        </div>
-      </template>
       <menu-content v-show="layout !== 'side'" class="header-menu" :nav-data="menu" />
       <template #operations>
         <div class="operations-container">
@@ -34,7 +23,7 @@
                 <t-icon class="header-user-avatar" name="user-circle" />
               </template>
               <div class="header-user-account">
-                Tencent
+                {{ phone || 'Admin' }}
                 <t-icon name="chevron-down" />
               </div>
             </t-button>
@@ -51,17 +40,13 @@ import { useStore } from 'vuex';
 import { useRouter, useRoute } from 'vue-router';
 
 import { prefix } from '@/config/global';
-import tLogoFull from '@/assets/assets-logo-full.svg?component';
 import { MenuRoute } from '@/interface';
 
-import Notice from './Notice.vue';
 import Search from './Search.vue';
 import MenuContent from './MenuContent';
 
 export default defineComponent({
   components: {
-    tLogoFull,
-    Notice,
     Search,
     MenuContent,
   },
@@ -98,6 +83,8 @@ export default defineComponent({
   setup(props) {
     const store = useStore();
     const router = useRouter();
+
+    const phone = localStorage.getItem('phone');
 
     const toggleSettingPanel = () => {
       store.commit('setting/toggleSettingPanel', true);
@@ -171,6 +158,7 @@ export default defineComponent({
       handleLogout,
       navToGitHub,
       navToHelper,
+      phone,
     };
   },
 });

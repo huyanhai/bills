@@ -2,10 +2,8 @@ import { defineComponent, PropType, computed, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import { prefix } from '@/config/global';
-import pgk from '../../../package.json';
 import MenuContent from './MenuContent';
-import tLogo from '@/assets/assets-t-logo.svg?component';
-import tLogoFull from '@/assets/assets-logo-full.svg?component';
+import tLogo from '@/assets/logo1.png';
 
 const MIN_POINT = 992 - 1;
 
@@ -53,8 +51,6 @@ export default defineComponent({
   name: 'SideNav',
   components: {
     MenuContent,
-    tLogoFull,
-    tLogo,
   },
   props: {
     menu: {
@@ -125,7 +121,7 @@ export default defineComponent({
     };
 
     const goHome = () => {
-      router.push('/dashboard/base');
+      router.push('/dashboard/waiting');
     };
 
     return {
@@ -151,11 +147,7 @@ export default defineComponent({
             logo: () =>
               this.showLogo && (
                 <span class={`${prefix}-side-nav-logo-wrapper`} onClick={this.goHome}>
-                  {this.collapsed ? (
-                    <tLogo class={`${prefix}-side-nav-logo-t-logo`} />
-                  ) : (
-                    <t-logo-full class={`${prefix}-side-nav-logo-tdesign-logo`} />
-                  )}
+                  <img src={tLogo} class="logo" />
                 </span>
               ),
           }}

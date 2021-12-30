@@ -3,17 +3,37 @@
     <card class="list-card-container">
       <t-row justify="space-between">
         <div class="left-operation-container">
-          <t-button @click="handleSetupContract"> 新建合同 </t-button>
-          <t-button variant="base" theme="default" :disabled="!selectedRowKeys.length"> 导出合同 </t-button>
-          <p v-if="!!selectedRowKeys.length" class="selected-count">已选{{ selectedRowKeys.length }}项</p>
+          <t-breadcrumb :max-item-width="'150'">
+            <t-breadcrumbItem to="/">电子发票</t-breadcrumbItem>
+            <t-breadcrumbItem>待开票管理</t-breadcrumbItem>
+          </t-breadcrumb>
         </div>
-        <t-input v-model="searchValue" class="search-input" placeholder="请输入你需要搜索的内容" clearable>
-          <template #suffix-icon>
-            <search-icon size="20px" />
-          </template>
-        </t-input>
       </t-row>
-
+      <t-row style="margin-bottom: 20px">
+        <t-col :span="24">
+          <t-form layout="inline">
+            <t-form-item label="发票类型" name="buyerInvoiceType">
+              <t-select v-model="formData.buyerInvoiceType" class="demo-select-base" clearable>
+                <t-option key="1" value="1" label="专票 "> </t-option>
+                <t-option key="1" value="2" label="普票 "> </t-option>
+              </t-select>
+            </t-form-item>
+            <t-form-item label="购方类型" name="buyerType">
+              <t-select v-model="formData.buyerType" class="demo-select-base" clearable>
+                <t-option key="1" value="1" label="企业 "> </t-option>
+                <t-option key="1" value="2" label="个人 "> </t-option>
+              </t-select>
+            </t-form-item>
+            <t-form-item label="购方抬头" name="buyerTitle">
+              <t-input v-model="formData.buyerTitle" />
+            </t-form-item>
+            <t-form-item label="购方税号" name="buyerTaxNo">
+              <t-input v-model="formData.buyerTaxNo" />
+            </t-form-item>
+            <t-button @click="search">搜索</t-button>
+          </t-form>
+        </t-col>
+      </t-row>
       <t-table
         :data="data"
         :columns="COLUMNS"
@@ -23,58 +43,44 @@
         :pagination="pagination"
         :selected-row-keys="selectedRowKeys"
         :loading="dataLoading"
-        @page-change="rehandlePageChange"
         @change="rehandleChange"
-        @select-change="rehandleSelectChange"
       >
-        <template #status="{ row }">
-          <t-tag v-if="row.status === CONTRACT_STATUS.FAIL" theme="danger" variant="light"> 审核失败 </t-tag>
-          <t-tag v-if="row.status === CONTRACT_STATUS.AUDIT_PENDING" theme="warning" variant="light"> 待审核 </t-tag>
-          <t-tag v-if="row.status === CONTRACT_STATUS.EXEC_PENDING" theme="warning" variant="light"> 待履行 </t-tag>
-          <t-tag v-if="row.status === CONTRACT_STATUS.EXECUTING" theme="success" variant="light"> 履行中 </t-tag>
-          <t-tag v-if="row.status === CONTRACT_STATUS.FINISH" theme="success" variant="light"> 已完成 </t-tag>
+        <template #buyerInvoiceType="{ row }" mplate>
+          <p v-if="row.buyerInvoiceType === 1" style="color: red">{{ buyerInvoiceType[row.buyerInvoiceType] }}</p>
+          <p v-if="row.buyerInvoiceType === 2" style="color: blue">{{ buyerInvoiceType[row.buyerInvoiceType] }}</p>
         </template>
-        <template #contractType="{ row }">
-          <p v-if="row.contractType === CONTRACT_TYPES.MAIN">审核失败</p>
-          <p v-if="row.contractType === CONTRACT_TYPES.SUB">待审核</p>
-          <p v-if="row.contractType === CONTRACT_TYPES.SUPPLEMENT">待履行</p>
+        <template #buyerType="{ row }">
+          <p v-if="row.buyerType === 1" style="color: red">{{ buyerType[row.buyerType] }}</p>
+          <p v-if="row.buyerType === 2" style="color: blue">{{ buyerType[row.buyerType] }}</p>
         </template>
-        <template #paymentType="{ row }">
-          <div v-if="row.paymentType === CONTRACT_PAYMENT_TYPES.PAYMENT" class="payment-col">
-            付款<trend class="dashboard-item-trend" type="up" />
-          </div>
-          <div v-if="row.paymentType === CONTRACT_PAYMENT_TYPES.RECIPT" class="payment-col">
-            收款<trend class="dashboard-item-trend" type="down" />
-          </div>
+        <template #state="{ row }" mplate>
+          <t-tag v-if="[0, 1].includes(row.state)" theme="primary" variant="light" size="small">
+            {{ state[row.state] }}
+          </t-tag>
+          <t-tag v-if="[1, 2].includes(row.state)" theme="success" variant="light" size="small">
+            {{ state[row.state] }}
+          </t-tag>
+          <t-tag v-if="[3, 4].includes(row.state)" theme="warning" variant="light" size="small">
+            {{ state[row.state] }}
+          </t-tag>
+          <t-tag v-if="[5, 6, 7].includes(row.state)" theme="danger" variant="light" size="small">
+            {{ state[row.state] }}
+          </t-tag>
         </template>
-
         <template #op="slotProps">
-          <a class="t-button-link" @click="handleClickDetail()">详情</a>
-          <a class="t-button-link" @click="handleClickDelete(slotProps)">删除</a>
+          <t-button size="small" @click="edit(slotProps.row)">发票操作</t-button>
         </template>
       </t-table>
     </card>
-
-    <t-dialog
-      v-model:visible="confirmVisible"
-      header="确认删除当前所选合同？"
-      :body="confirmBody"
-      :on-cancel="onCancel"
-      @confirm="onConfirmDelete"
-    />
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, onMounted, computed } from 'vue';
-import { useRouter } from 'vue-router';
-import { SearchIcon } from 'tdesign-icons-vue-next';
-import { MessagePlugin } from 'tdesign-vue-next';
+import { defineComponent, ref, onMounted, reactive, computed } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
-import { CONTRACT_STATUS, CONTRACT_TYPES, CONTRACT_PAYMENT_TYPES } from '@/constants';
-import Trend from '@/components/trend/index.vue';
+import { CONTRACT_TYPES } from '@/constants';
 import Card from '@/components/card/index.vue';
-import { ResDataType } from '@/interface';
-import request from '@/utils/request';
+import { invoiceInfo } from '@/api';
 
 import { COLUMNS } from './constants';
 
@@ -82,30 +88,76 @@ export default defineComponent({
   name: 'ListBaseCard',
   components: {
     Card,
-    SearchIcon,
-    Trend,
   },
   setup() {
+    const state = reactive({
+      0: '待确认',
+      1: '已确认',
+      2: '开票成功',
+      3: '已作废',
+      4: '已冲红',
+      5: '取消开票',
+      6: '验签中',
+      7: '红票验签中',
+    });
+    const buyerInvoiceType = reactive({
+      1: '专票',
+      2: '普票',
+    });
+    const buyerType = reactive({
+      1: '个人',
+      2: '企业',
+    });
     const data = ref([]);
     const pagination = ref({
-      defaultPageSize: 20,
+      defaultPageSize: 10,
       total: 100,
       defaultCurrent: 1,
     });
 
+    const formData: any = reactive({
+      buyerInvoiceType: '',
+      buyerType: '',
+      buyerTitle: '',
+      buyerTaxNo: '',
+    });
+
+    const router = useRouter();
+
     const searchValue = ref('');
 
     const dataLoading = ref(false);
-    const fetchData = async () => {
+
+    const pageType = computed(() => {
+      const { name } = useRoute();
+      switch (name) {
+        case 'complete':
+          return 1;
+        case 'voided':
+          return 2;
+        default:
+          return 0;
+      }
+    });
+
+    const fetchData = async (search = {}) => {
       dataLoading.value = true;
       try {
-        const res: ResDataType = await request.get('/api/get-list');
+        const res: any = await invoiceInfo({
+          page: pagination.value.defaultCurrent,
+          limit: pagination.value.defaultPageSize,
+          searchModel: {
+            stateSearch: pageType.value,
+            ...search,
+          },
+        });
+
         if (res.code === 0) {
-          const { list = [] } = res.data;
-          data.value = list;
+          data.value = res.data || [];
+
           pagination.value = {
             ...pagination.value,
-            total: list.length,
+            total: Number(res.msg) || 0,
           };
         }
       } catch (e) {
@@ -115,80 +167,50 @@ export default defineComponent({
       }
     };
 
-    const deleteIdx = ref(-1);
-    const confirmBody = computed(() => {
-      if (deleteIdx.value > -1) {
-        const { name } = data.value[deleteIdx.value];
-        return `删除后，${name}的所有合同信息将被清空，且无法恢复`;
-      }
-      return '';
-    });
+    const search = () => {
+      fetchData(formData);
+    };
+
+    const rehandleChange = (curr) => {
+      const { current, pageSize } = curr.pagination;
+
+      pagination.value.defaultCurrent = current;
+      pagination.value.defaultPageSize = pageSize;
+
+      fetchData();
+    };
+
+    const edit = (item) => {
+      router.push({
+        path: '/dashboard/tick',
+        query: {
+          id: item.id,
+        },
+      });
+    };
 
     onMounted(() => {
       fetchData();
     });
 
-    const confirmVisible = ref(false);
-
     const selectedRowKeys = ref([1, 2]);
 
-    const router = useRouter();
-
-    const resetIdx = () => {
-      deleteIdx.value = -1;
-    };
-
-    const onConfirmDelete = () => {
-      // 真实业务请发起请求
-      data.value.splice(deleteIdx.value, 1);
-      pagination.value.total = data.value.length;
-      const selectedIdx = selectedRowKeys.value.indexOf(deleteIdx.value);
-      if (selectedIdx > -1) {
-        selectedRowKeys.value.splice(selectedIdx, 1);
-      }
-      confirmVisible.value = false;
-      MessagePlugin.success('删除成功');
-      resetIdx();
-    };
-
-    const onCancel = () => {
-      resetIdx();
-    };
-
     return {
-      CONTRACT_STATUS,
       CONTRACT_TYPES,
-      CONTRACT_PAYMENT_TYPES,
       COLUMNS,
       data,
       searchValue,
       dataLoading,
       pagination,
-      confirmBody,
-      confirmVisible,
       rowKey: 'index',
-      onConfirmDelete,
-      onCancel,
       selectedRowKeys,
-      rehandleSelectChange(val: number[]) {
-        selectedRowKeys.value = val;
-      },
-      rehandlePageChange(curr, pageInfo) {
-        console.log('分页变化', curr, pageInfo);
-      },
-      rehandleChange(changeParams, triggerAndData) {
-        console.log('统一Change', changeParams, triggerAndData);
-      },
-      handleClickDetail() {
-        router.push('/detail/base');
-      },
-      handleSetupContract() {
-        router.push('/form/base');
-      },
-      handleClickDelete(row: { rowIndex: any }) {
-        deleteIdx.value = row.rowIndex;
-        confirmVisible.value = true;
-      },
+      state,
+      buyerInvoiceType,
+      rehandleChange,
+      edit,
+      buyerType,
+      formData,
+      search,
     };
   },
   methods: {},

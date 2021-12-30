@@ -1,16 +1,12 @@
 <template>
-  <header class="login-header">
-    <logo-full-icon class="logo" />
-  </header>
+  <header class="login-header"></header>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useStore } from 'vuex';
-import LogoFullIcon from '@/assets/assets-logo-full.svg?component';
 
 export default defineComponent({
-  components: { LogoFullIcon },
   setup() {
     const store = useStore();
     const toggleSettingPanel = () => {
@@ -46,8 +42,7 @@ export default defineComponent({
   color: @text-color-primary;
 
   .logo {
-    width: 188px;
-    height: 64px;
+    height: 30px;
   }
 
   .operations-container {

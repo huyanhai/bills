@@ -1,5 +1,6 @@
 import axios from 'axios';
 import proxy from '../config/proxy';
+import { TOKEN_NAME } from '@/config/global';
 
 const env = import.meta.env.MODE || 'development';
 
@@ -17,7 +18,10 @@ const instance = axios.create({
   withCredentials: true,
 });
 
-instance.interceptors.request.use((config) => config);
+instance.interceptors.request.use((config) => {
+  config.headers.token = localStorage.getItem(TOKEN_NAME);
+  return config;
+});
 
 instance.defaults.timeout = 5000;
 
@@ -25,9 +29,7 @@ instance.interceptors.response.use(
   (response) => {
     if (response.status === 200) {
       const { data } = response;
-      if (data.code === CODE.REQUEST_SUCCESS) {
-        return data;
-      }
+      return data;
     }
     return response;
   },

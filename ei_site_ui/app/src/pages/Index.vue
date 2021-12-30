@@ -45,10 +45,10 @@
       </van-grid>
     </Card>
     <Card>
-      <view class="kaip-items">
+      <!-- <view class="kaip-items">
         <view class="col-l">月开票:￥{{ statisticalp.money }}</view>
         <view class="col-r">月冲红:￥{{ statisticalp.redMoney }}</view>
-      </view>
+      </view> -->
       <van-grid direction="vertical" column-num="3" class="m-grid" :border="false">
         <van-grid-item :icon="require('../static/image/kp.png')" text="待开票" @click="goPage('0')" :badge="waitingNum" />
         <van-grid-item :icon="require('../static/image/kp.png')" text="已开票" @click="goPage('1')" />

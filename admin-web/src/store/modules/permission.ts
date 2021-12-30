@@ -48,6 +48,7 @@ const actions = {
     } else {
       accessedRouters = filterPermissionsRouters(asyncRouterList, roles);
     }
+    console.log(accessedRouters);
 
     commit('setRouters', accessedRouters);
 

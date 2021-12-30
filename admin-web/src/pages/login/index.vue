@@ -4,12 +4,15 @@
 
     <div class="login-container">
       <div class="title-container">
-        <div class="sub-title"></div>
+        <div class="sub-title">
+          <img src="@/assets/logo.png" class="logo" />
+          <p class="title">票盟云商户中心</p>
+        </div>
       </div>
       <login v-if="type === 'login'" />
     </div>
 
-    <footer class="copyright">Copyright @ 2021-2022 Tencent. All Rights Reserved</footer>
+    <footer class="copyright"></footer>
   </div>
 </template>
 <script lang="ts">

@@ -44,6 +44,8 @@ export default {
     //   // });
     //   await userLogin()
     // }
+  },
+  onShow() {
     this.LoadAd();
   },
   methods: {
@@ -56,9 +58,15 @@ export default {
         interstitialAd = wx.createInterstitialAd({
           adUnitId: "adunit-a91fbcf226739279",
         });
-        interstitialAd.onLoad(() => {});
-        interstitialAd.onError((err) => {});
-        interstitialAd.onClose(() => {});
+        interstitialAd.onLoad(() => {
+          console.log("广告加载");
+        });
+        interstitialAd.onError((err) => {
+          console.log("广告加载失败", err);
+        });
+        interstitialAd.onClose(() => {
+          console.log("广告关闭");
+        });
       }
 
       // 在适合的场景显示插屏广告

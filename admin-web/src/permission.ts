@@ -25,6 +25,7 @@ router.beforeEach(async (to, from, next) => {
     }
 
     const roles = store.getters['user/roles'];
+
     if (roles && roles.length > 0) {
       next();
     } else {
