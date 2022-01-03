@@ -86,7 +86,9 @@
         </template>
         <template #op="slotProps">
           <t-button size="small" @click="showPdf(slotProps.row, 'pdf')">查看电票</t-button>
-          <t-button theme="danger" size="small" @click="showPdf(slotProps.row, 'red')">查看冲红发票</t-button>
+          <t-button theme="danger" size="small" @click="showPdf(slotProps.row, 'red')" v-if="slotProps.row.state !== 3">
+            查看冲红发票
+          </t-button>
         </template>
       </t-table>
     </card>

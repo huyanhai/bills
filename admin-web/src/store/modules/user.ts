@@ -37,12 +37,13 @@ const getters = {
 
 const actions = {
   async login({ commit }, userInfo) {
-    const res = await login(userInfo);
-    if ((res as any).code === 0) {
-      commit('setToken', res.data);
+    const data = await login(userInfo);
+
+    if ((data as any).code === 0) {
+      commit('setToken', data.data);
       localStorage.setItem('phone', userInfo.phone);
     } else {
-      throw res.data;
+      throw data;
     }
   },
   async getUserInfo({ commit }) {

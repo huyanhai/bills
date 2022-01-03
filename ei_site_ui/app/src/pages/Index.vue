@@ -14,11 +14,11 @@
         </view>
         <view class="col-l">
           <view class="name">普通纸票</view>
-          <view class="num">{{ blankInvoice.vatSpecialInvoice || 0 }}</view>
+          <view class="num">{{ blankInvoice.valueAddedTaxInvoice || 0 }}</view>
         </view>
         <view class="col-l">
           <view class="name">专用纸票</view>
-          <view class="num">{{ blankInvoice.valueAddedTaxInvoice || 0 }}</view>
+          <view class="num">{{ blankInvoice.vatSpecialInvoice || 0 }}</view>
         </view>
       </view>
     </view>

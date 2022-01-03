@@ -3,10 +3,10 @@
     <t-row :gutter="24" style="margin-bottom: 20px">
       <t-col :span="24">
         <t-button theme="default" @click="$router.back()"> 返回列表 </t-button>
+        <t-button v-if="[4, 7].includes(pageData.invoiceTypeCode)" theme="primary" @click="dayin(pageData)">
+          打印发票
+        </t-button>
         <template v-if="!query.type">
-          <t-button v-if="[4, 7].includes(pageData.invoiceTypeCode)" theme="primary" @click="dayin">
-            打印发票
-          </t-button>
           <t-button theme="danger" @click="chonghong"> 冲红 </t-button>
           <t-button v-if="[4, 7].includes(pageData.invoiceTypeCode)" theme="danger" @click="zuofei"> 作废 </t-button>
         </template>
@@ -34,12 +34,17 @@ const src = computed(() => {
   if (query.type) {
     return query.type === 'red' ? pageData.value.redPdfUrl : pageData.value.pdfUrl;
   }
+
   return pageData.value.pdfUrl;
 });
 
-const dayin = () => {
+const dayin = (item) => {
+  let url = `http://pmy.funku.cn/agent/api/p/transfer/pdf/${item.id}`;
+  if (query.type === 'red') {
+    url = `http://pmy.funku.cn/agent/api/p/transfer/pdf/red/${item.id}`;
+  }
   print({
-    printable: src.value, // 标签元素id
+    printable: url, // 标签元素id
     type: 'pdf',
     header: '',
     targetStyles: ['*'],
@@ -83,10 +88,11 @@ const zuofei = async () => {
 };
 
 const getInfo = async () => {
-  const data = await invoiceDetails({
+  const { data } = await invoiceDetails({
     id: (query as any).id,
   });
   pageData.value = data || {};
+  console.log(pageData);
 };
 
 onMounted(() => {

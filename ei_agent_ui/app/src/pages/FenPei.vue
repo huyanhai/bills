@@ -40,8 +40,10 @@
     <van-popup :show="show" position="bottom" :close-on-click-overlay="false">
       <van-picker
         :columns="[
-          { name: '增值税普通电子发票', id: 26 },
-          { name: '增值税专用电子发票', id: 28 },
+          { name: '纸质专票', id: 4 },
+          { name: '纸质普票', id: 7 },
+          { name: '电子普票', id: 26 },
+          { name: '电子专票', id: 28 },
         ]"
         @confirm="confirmItem"
         @cancel="show = false"

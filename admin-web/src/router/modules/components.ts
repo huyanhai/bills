@@ -25,7 +25,7 @@ export default [
         path: 'voided',
         name: 'voided',
         component: () => import('@/pages/list/base/voided.vue'),
-        meta: { title: '冲红发票管理', hide: false },
+        meta: { title: '冲红作废管理', hide: false },
       },
       {
         path: 'tick',
