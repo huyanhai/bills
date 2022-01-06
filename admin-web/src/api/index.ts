@@ -50,9 +50,10 @@ export const invoiceCancel = (data: { invioiceId: string }) => {
 export const invoiceTijiao = (data: {
   invoiceId: string;
   goodsId: string;
-  price: number;
+  money: number;
   number: number;
   invoiceTypeCode: number;
+  unit: string;
 }) => {
   return request({
     url: 'agent/api/site/get/invoice',
@@ -74,5 +75,22 @@ export const invoiceCancel1 = (data: { invoiceId: string }) => {
     url: 'agent/api/site/get/invoice/cancel',
     method: 'get',
     params: data,
+  });
+};
+
+export const invoiceTongji = (
+  url: string,
+  data: {
+    page: number;
+    limit: number;
+    searchModel: {
+      [key: string]: any;
+    };
+  },
+) => {
+  return request({
+    url,
+    method: 'post',
+    data,
   });
 };

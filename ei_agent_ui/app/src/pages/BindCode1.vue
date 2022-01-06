@@ -1,5 +1,13 @@
 <template>
   <view class="page-bindcode form">
+    <CInput
+      :value.sync="name"
+      placeholder="请输入商户名称"
+      label="商户名称"
+      v-if="name"
+      :disabled="true"
+      class="no-disable"
+    />
     <CityPicker
       placeholder="请输入门店地址"
       :defaultVal="value"
@@ -15,14 +23,6 @@
     <CInput :value.sync="form.drawer" placeholder="请输入开票人" label="开票人" :required="true" />
     <CInput :value.sync="form.checker" placeholder="请输入复核人" label="复核人" :required="true" />
     <CInput :value.sync="form.payee" placeholder="请输入收款人" label="收款人" :required="true" />
-    <CInput
-      :value.sync="name"
-      placeholder="请输入商户名称"
-      label="商户名称"
-      v-if="name"
-      :disabled="true"
-      class="no-disable"
-    />
     <CInput :value.sync="form.sellerBank" placeholder="请输入开户行" label="开户行" />
     <CInput :value.sync="form.sellerAccount" placeholder="请输入银行账号" label="银行账号" />
     <van-button class="m-button" type="info" @click="onSubmit">

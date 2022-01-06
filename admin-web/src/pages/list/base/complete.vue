@@ -2,7 +2,7 @@
   <div>
     <card class="list-card-container">
       <t-breadcrumb :max-item-width="'150'">
-        <t-breadcrumbItem to="/">电子发票</t-breadcrumbItem>
+        <t-breadcrumbItem to="/">发票管理</t-breadcrumbItem>
         <t-breadcrumbItem>已开票管理</t-breadcrumbItem>
       </t-breadcrumb>
       <t-row style="margin: 20px 0">
@@ -18,8 +18,8 @@
             </t-form-item>
             <t-form-item label="购方类型" name="buyerType">
               <t-select v-model="formData.buyerType" class="demo-select-base" clearable>
-                <t-option key="1" value="1" label="企业 "> </t-option>
-                <t-option key="1" value="2" label="个人 "> </t-option>
+                <t-option key="1" value="2" label="企业 "> </t-option>
+                <t-option key="1" value="1" label="个人 "> </t-option>
               </t-select>
             </t-form-item>
             <t-form-item label="购方抬头" name="buyerTitle">
@@ -58,10 +58,10 @@
         @change="rehandleChange"
       >
         <template #invoiceTypeCode="{ row }">
-          <p v-if="[7, 26].includes(row.invoiceTypeCode)" style="color: red">
+          <p v-if="[7, 26].includes(row.invoiceTypeCode)" style="color: blue">
             {{ invoiceTypeCode[row.invoiceTypeCode] }}
           </p>
-          <p v-if="[4, 28].includes(row.invoiceTypeCode)" style="color: blue">
+          <p v-if="[4, 28].includes(row.invoiceTypeCode)" style="color: red">
             {{ invoiceTypeCode[row.invoiceTypeCode] }}
           </p>
         </template>
@@ -72,7 +72,7 @@
           <t-tag v-if="[0, 1].includes(row.state)" theme="primary" variant="light" size="small">
             {{ stateType[row.state] }}
           </t-tag>
-          <t-tag v-if="[1, 2].includes(row.state)" theme="success" variant="light" size="small">
+          <t-tag v-if="[2].includes(row.state)" theme="success" variant="light" size="small">
             {{ stateType[row.state] }}
           </t-tag>
           <t-tag v-if="[3, 4].includes(row.state)" theme="warning" variant="light" size="small">
@@ -120,8 +120,8 @@ const invoiceTypeCode = reactive({
 });
 
 const buyerType = reactive({
-  1: '个人',
-  2: '企业',
+  2: '个人',
+  1: '企业',
 });
 
 const formData: any = reactive({

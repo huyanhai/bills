@@ -61,7 +61,7 @@
         <view class="item">
           <view class="col-l" v-if="data.buyerType === 1">公司名称</view>
           <view class="col-l" v-else>姓名</view>
-          <view class="col-r">{{ data.buyerType === 1 ? data.buyerTitle : data.agentName || "" }}</view>
+          <view class="col-r">{{ data.buyerTitle || "" }}</view>
         </view>
         <view class="item" v-if="data.buyerType === 1">
           <view class="col-l">公司税号</view>

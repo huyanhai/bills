@@ -180,10 +180,7 @@ export default {
       item: null,
       show: false,
       show1: false,
-      columns1: [
-        { id: 1, name: 'U_KEY' },
-        { id: 2, name: '百望税控盘' },
-      ],
+      columns1: [{ id: 1, name: 'U_KEY' }],
       columns2: [
         { id: 0, name: '餐饮' },
         { id: 1, name: '酒店' },

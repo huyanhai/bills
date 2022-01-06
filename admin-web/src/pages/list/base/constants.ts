@@ -28,7 +28,7 @@ export const COLUMNS = [
     cell: { col: 'buyerTaxNo' },
   },
   {
-    title: '发票状态',
+    title: '状态',
     width: 80,
     ellipsis: true,
     colKey: 'state',
@@ -36,7 +36,7 @@ export const COLUMNS = [
   },
   {
     title: '开票金额',
-    width: 80,
+    width: 120,
     ellipsis: true,
     colKey: 'money',
     cell: { col: 'money' },

@@ -37,7 +37,9 @@
         <ul class="headerRight">
           <!-- <li><label> 发票代码： </label><span>111111</span></li>
           <li><label> 发票号码： </label><span>111111</span></li> -->
-          <li><label> 开票日期： </label><span></span></li>
+          <li>
+            <label> 开票日期： </label><span>{{ day }}</span>
+          </li>
           <!-- <li><label> 校&nbsp;&nbsp;验&nbsp;&nbsp;码： </label><span>11111 22222 33333 44444</span></li> -->
         </ul>
       </div>
@@ -93,20 +95,10 @@
                 <input v-model="inputData.danwei" style="width: 50px" @focus="checkInput('danwei')" />
               </td>
               <td>
-                <input
-                  v-model="inputData.number"
-                  style="width: 50px"
-                  @input="checkNum('number')"
-                  @focus="checkInput('number')"
-                />
+                <t-input-number v-model="inputData.number" size="small" :min="1" />
               </td>
               <td>
-                <input
-                  v-model="inputData.price"
-                  style="width: 50px"
-                  @input="checkNum1('price')"
-                  @focus="checkInput('price')"
-                />
+                {{ inputData.price }}
               </td>
               <td>{{ jine }}</td>
               <td>{{ inputData.tax_rate }}</td>
@@ -128,7 +120,15 @@
               <td colspan="7">
                 <div style="width: 100%; display: flex">
                   <div type="text" style="width: 60%; text-align: left">{{ cnJine }}</div>
-                  <div type="text" style="width: 30%">(小写){{ xiaoxie }}</div>
+                  <div type="text" style="width: 30%">
+                    (小写)
+                    <input
+                      v-model="inputData.xiaoxie"
+                      style="width: 50px"
+                      @input="checkNum1('xiaoxie')"
+                      @focus="checkInput('xiaoxie')"
+                    />
+                  </div>
                 </div>
               </td>
             </tr>
@@ -179,6 +179,7 @@ import { ref, onMounted, reactive, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { MessagePlugin, DialogPlugin } from 'tdesign-vue-next';
 import nzh from 'nzh/cn';
+import dayjs from 'dayjs';
 import { invoiceDetails, invoiceQuery, goodsinfo, invoiceCancel, invoiceTijiao } from '@/api';
 import Card from '@/components/card/index.vue';
 
@@ -191,16 +192,20 @@ const inputData: any = reactive({
   danwei: null,
   number: 1,
   price: null,
+  xiaoxie: 0,
 });
 
 const { query } = useRoute();
 const router = useRouter();
+
+const day = dayjs().format('YYYY-MM-DD');
 
 const getInfo = async () => {
   const { data } = await invoiceDetails({
     id: (query as any).id,
   });
   pageData.value = data || {};
+  inputData.xiaoxie = data.money;
 };
 
 const getinvoiceQuery = async () => {
@@ -213,16 +218,19 @@ const getinvoiceQuery = async () => {
   }
 };
 
-const goodsinfoQuery = async () => {
-  const { data } = await goodsinfo();
-  goodsinfoList.value = data;
-};
-
 const changeGoods = (e) => {
   for (const item of goodsinfoList.value) {
     if (item.id === e) {
       inputData.tax_rate = item.tax_rate;
     }
+  }
+};
+const goodsinfoQuery = async () => {
+  const { data } = await goodsinfo();
+  goodsinfoList.value = data;
+  if (data.length > 0) {
+    inputData.goodsId = data[0].id;
+    changeGoods(data[0].id);
   }
 };
 
@@ -233,41 +241,48 @@ const checkInput = (type: string) => {
   }
 };
 
-const checkNum = (type: string) => {
-  if (!/^\d+$/.test(inputData[type])) {
-    inputData[type] = inputData[type].substring(0, inputData[type].length - 1);
-  }
-};
+// const checkNum = (type: string) => {
+//   if (!/^\d+$/.test(inputData[type])) {
+//     inputData[type] = inputData[type].substring(0, inputData[type].length - 1);
+//   }
+// };
 
 const checkNum1 = (type: string) => {
-  if (!/^(([1-9]\d*)|\d)(\.\d{1,2})?$/.test(inputData[type]) && !inputData[type].endsWith('.')) {
+  if (
+    (!/^(([1-9]\d*)|\d)(\.\d{1,10})?$/.test(inputData[type]) && !inputData[type].endsWith('.')) ||
+    inputData[type].split('.').length > 2
+  ) {
     inputData[type] = inputData[type].substring(0, inputData[type].length - 1);
   }
 };
 
-const xiaoxie: any = computed(() => {
-  if (!inputData.price || !inputData.number) {
-    return '';
-  }
-  return inputData.price * inputData.number;
-});
-
+// 金额
 const jine: any = computed(() => {
-  if (!inputData.tax_rate || !inputData.number || !inputData.danwei) {
+  if (!inputData.tax_rate) {
     return 0;
   }
-  return (xiaoxie.value / (1 + Number(inputData.tax_rate.replace('%', '') / 100))).toFixed(2);
+  return (Number(inputData.xiaoxie) / (1 + Number(inputData.tax_rate.replace('%', '') / 100))).toFixed(2);
+});
+
+inputData.price = computed(() => {
+  if (!inputData.number || !jine.value) {
+    return 0;
+  }
+  return Number(jine.value / inputData.number).toFixed(2);
 });
 
 const suie: any = computed(() => {
-  if (!xiaoxie.value || !jine.value) {
+  if (!inputData.xiaoxie || !jine.value) {
     return 0;
   }
-  return (xiaoxie.value - jine.value).toFixed(2);
+  return (inputData.xiaoxie - jine.value).toFixed(2);
 });
 
 const cnJine: any = computed(() => {
-  return nzh.toMoney(xiaoxie.value, {
+  if (!inputData.xiaoxie) {
+    return '';
+  }
+  return nzh.toMoney(inputData.xiaoxie || 0, {
     outSymbol: false,
   });
 });
@@ -298,26 +313,32 @@ const tijiao = async () => {
   if (!inputData.goodsId) {
     return MessagePlugin.error('请选择货物或应税劳务、服务名称！');
   }
-  if (!inputData.price) {
-    return MessagePlugin.error('请填写正确的单价！');
+  if (!inputData.xiaoxie) {
+    return MessagePlugin.error('请填写正确的金额！');
   }
   if (!inputData.number) {
     return MessagePlugin.error('请填写正确的数量！');
   }
-
-  const data = await invoiceTijiao({
-    invoiceId: (query as any).id,
-    invoiceTypeCode: inputData.invoiceTypeCode,
-    goodsId: inputData.goodsId,
-    price: Number(inputData.price),
-    number: Number(inputData.number),
+  const mydialog = DialogPlugin.confirm({
+    body: '确定开票',
+    onConfirm: async () => {
+      const data = await invoiceTijiao({
+        invoiceId: (query as any).id,
+        invoiceTypeCode: inputData.invoiceTypeCode,
+        goodsId: inputData.goodsId,
+        money: Number(inputData.xiaoxie),
+        number: Number(inputData.number),
+        unit: inputData.danwei,
+      });
+      if (data.code === 0) {
+        MessagePlugin.success('开票成功');
+        router.back();
+      } else {
+        MessagePlugin.error((data as any).msg);
+      }
+      mydialog.hide();
+    },
   });
-  if (data.code === 0) {
-    MessagePlugin.success('开票成功');
-    router.back();
-  } else {
-    MessagePlugin.error((data as any).msg);
-  }
 };
 
 onMounted(() => {
@@ -344,7 +365,7 @@ label {
   font-size: 14px;
   color: #000;
   padding: 20px;
-  border: 3px solid #000;
+  border: 3px solid #9c5223;
 }
 
 .invoiceHeader {

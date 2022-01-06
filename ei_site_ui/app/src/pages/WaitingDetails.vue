@@ -5,7 +5,7 @@
         <view class="item">
           <view class="col-l" v-if="invoice.buyerType === 1">公司名称</view>
           <view class="col-l" v-else>姓名</view>
-          <view class="col-r">{{ invoice.buyerType === 1 ? invoice.buyerTitle : invoice.agentName || "" }}</view>
+          <view class="col-r">{{ invoice.buyerTitle || "" }}</view>
         </view>
         <view class="item" v-if="invoice.buyerType === 1">
           <view class="col-l">公司税号</view>
@@ -63,7 +63,7 @@
         </view>
         <view class="item">
           <view class="col-l">
-            <CInput label="单价" titlew="100rpx" :value.sync="form.price" :type="number" placeholder="请输入价格" :required="true"> </CInput>
+            <CInput label="开票金额" titlew="100rpx" :value.sync="form.money" :type="number" placeholder="请输入价格" :required="true"> </CInput>
           </view>
         </view>
         <view class="item">
@@ -79,7 +79,7 @@
         </view>
       </view>
     </Card>
-    <view class="price">开票总额{{ form.price * form.number }}</view>
+    <!-- <view class="price">开票总额{{ form.money * form.number }}</view> -->
     <van-button type="info" class="ui-button" @click="onSubmit">
       开票
     </van-button>
@@ -112,7 +112,7 @@ export default {
         invoiceTypeName: "",
         goods_name: "",
         goodsId: "",
-        price: "",
+        money: "",
         number: "1",
         unit: "",
       },
@@ -168,7 +168,7 @@ export default {
       });
       if (data) {
         this.invoice = data;
-        this.form.price = data.money || 0;
+        this.form.money = data.money || 0;
       }
     },
     async getGoods() {

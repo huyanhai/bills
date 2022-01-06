@@ -2,7 +2,7 @@
   <div>
     <card class="list-card-container">
       <t-breadcrumb :max-item-width="'150'">
-        <t-breadcrumbItem to="/">电子发票</t-breadcrumbItem>
+        <t-breadcrumbItem to="/">发票管理</t-breadcrumbItem>
         <t-breadcrumbItem>冲红发票管理</t-breadcrumbItem>
       </t-breadcrumb>
       <t-row style="margin: 20px 0">
@@ -63,7 +63,7 @@
           <t-tag v-if="[0, 1].includes(row.state)" theme="primary" variant="light" size="small">
             {{ stateType[row.state] }}
           </t-tag>
-          <t-tag v-if="[1, 2].includes(row.state)" theme="success" variant="light" size="small">
+          <t-tag v-if="[2].includes(row.state)" theme="success" variant="light" size="small">
             {{ stateType[row.state] }}
           </t-tag>
           <t-tag v-if="[3, 4].includes(row.state)" theme="warning" variant="light" size="small">
@@ -85,9 +85,9 @@
           <p>{{ buyerType[row.buyerType] }}</p>
         </template>
         <template #op="slotProps">
-          <t-button size="small" @click="showPdf(slotProps.row, 'pdf')">查看电票</t-button>
-          <t-button theme="danger" size="small" @click="showPdf(slotProps.row, 'red')" v-if="slotProps.row.state !== 3">
-            查看冲红发票
+          <t-button size="small" @click="showPdf(slotProps.row, 'pdf')">查看发票</t-button>
+          <t-button v-if="slotProps.row.state !== 3" theme="danger" size="small" @click="showPdf(slotProps.row, 'red')">
+            查看红票
           </t-button>
         </template>
       </t-table>
@@ -121,8 +121,8 @@ const invoiceTypeCode = reactive({
   28: '专票（电票）',
 });
 const buyerType = reactive({
-  1: '个人',
-  2: '企业',
+  2: '个人',
+  1: '企业',
 });
 
 const formData: any = reactive({

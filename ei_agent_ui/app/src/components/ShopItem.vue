@@ -34,12 +34,7 @@
         税控设备
       </van-button>
       <van-button type="info" size="small" @click="onScanCode(item)">新增码牌</van-button>
-      <van-button
-        v-if="item.state !== 1"
-        type="info"
-        size="small"
-        @click="goBind('BindCode1', item.id)"
-      >
+      <van-button type="info" size="small" @click="goBind('BindCode1', item.id)">
         开票信息
       </van-button>
       <!-- <van-button

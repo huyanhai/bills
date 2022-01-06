@@ -43,7 +43,7 @@ export const COLUMNS = [
   },
   {
     title: '开票金额',
-    width: 80,
+    width: 120,
     ellipsis: true,
     colKey: 'invoiceTotalPriceTax',
     cell: { col: 'invoiceTotalPriceTax' },

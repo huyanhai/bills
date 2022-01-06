@@ -28,6 +28,12 @@ export default [
         meta: { title: '冲红作废管理', hide: false },
       },
       {
+        path: 'invoice',
+        name: 'invoice',
+        component: () => import('@/pages/list/base/tongji.vue'),
+        meta: { title: '统计', hide: false },
+      },
+      {
         path: 'tick',
         name: 'tick',
         component: () => import('@/pages/list/base/tick.vue'),

@@ -4,7 +4,7 @@
       <t-row justify="space-between">
         <div class="left-operation-container">
           <t-breadcrumb :max-item-width="'150'">
-            <t-breadcrumbItem to="/">电子发票</t-breadcrumbItem>
+            <t-breadcrumbItem to="/">发票管理</t-breadcrumbItem>
             <t-breadcrumbItem>待开票管理</t-breadcrumbItem>
           </t-breadcrumb>
         </div>
@@ -50,8 +50,8 @@
           <p v-if="row.buyerInvoiceType === 2" style="color: blue">{{ buyerInvoiceType[row.buyerInvoiceType] }}</p>
         </template>
         <template #buyerType="{ row }">
-          <p v-if="row.buyerType === 1" style="color: red">{{ buyerType[row.buyerType] }}</p>
-          <p v-if="row.buyerType === 2" style="color: blue">{{ buyerType[row.buyerType] }}</p>
+          <p v-if="row.buyerType === 2" style="color: red">{{ buyerType[row.buyerType] }}</p>
+          <p v-if="row.buyerType === 1" style="color: blue">{{ buyerType[row.buyerType] }}</p>
         </template>
         <template #state="{ row }" mplate>
           <t-tag v-if="[0, 1].includes(row.state)" theme="primary" variant="light" size="small">
@@ -105,8 +105,8 @@ export default defineComponent({
       2: '普票',
     });
     const buyerType = reactive({
-      1: '个人',
-      2: '企业',
+      2: '个人',
+      1: '企业',
     });
     const data = ref([]);
     const pagination = ref({
