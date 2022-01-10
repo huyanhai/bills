@@ -102,6 +102,12 @@
       "style": {
         "navigationBarTitleText": "新增开票员"
       }
+    },
+    {
+      "path": "pages/Tongji",
+      "style": {
+        "navigationBarTitleText": "开票统计"
+      }
     }
   ],
   "window": {
@@ -157,7 +163,8 @@
       "van-row": "/wxcomponents/vant/row/index",
       "van-col": "/wxcomponents/vant/col/index",
       "van-cell": "/wxcomponents/vant/cell/index",
-      "van-switch": "/wxcomponents/vant/switch/index"
+      "van-switch": "/wxcomponents/vant/switch/index",
+      "van-datetime-picker": "/wxcomponents/vant/datetime-picker/index"
     }
   }
 }

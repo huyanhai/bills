@@ -55,6 +55,11 @@
         <van-grid-item :icon="require('../static/image/kp.png')" text="冲红发票" @click="goPage('2')" />
       </van-grid>
     </Card>
+    <Card>
+      <van-grid direction="vertical" column-num="3" class="m-grid" :border="false">
+        <van-grid-item :icon="require('../static/image/kp.png')" text="开票统计" @click="goTongji" />
+      </van-grid>
+    </Card>
   </view>
 </template>
 
@@ -109,6 +114,11 @@ export default {
     }
   },
   methods: {
+    goTongji() {
+      uni.navigateTo({
+        url: `Tongji`,
+      });
+    },
     titleClick() {
       console.log("titleClick");
     },

@@ -31,7 +31,19 @@ export default [
         path: 'invoice',
         name: 'invoice',
         component: () => import('@/pages/list/base/tongji.vue'),
-        meta: { title: '统计', hide: false },
+        meta: { title: '开票统计', hide: false },
+      },
+      {
+        path: 'cancel',
+        name: 'cancel',
+        component: () => import('@/pages/list/base/tongji2.vue'),
+        meta: { title: '作废统计', hide: false },
+      },
+      {
+        path: 'red',
+        name: 'red',
+        component: () => import('@/pages/list/base/tongji3.vue'),
+        meta: { title: '冲红统计', hide: false },
       },
       {
         path: 'tick',

@@ -1,4 +1,8 @@
 <template>
+  <div class="tongji">
+    <div class="item">开票金额:{{ tongjixinxi.sumMoney }}元</div>
+    <div class="item">开票数量:{{ tongjixinxi.sumNumber }}张</div>
+  </div>
   <t-table
     :data="data"
     :columns="COLUMNS"
@@ -34,6 +38,11 @@ const pagination = ref({
   defaultPageSize: 10,
   total: 10,
   defaultCurrent: 1,
+});
+
+const tongjixinxi = ref({
+  sumMoney: '',
+  sumNumber: '',
 });
 
 const props = defineProps({
@@ -85,6 +94,8 @@ const getData = (search?: { [key: string]: any }) => {
           ...pagination.value,
           total: Number(res.msg) || 0,
         };
+        tongjixinxi.value.sumMoney = res.data.sumMoney;
+        tongjixinxi.value.sumNumber = res.data.sumNumber;
       }
     } catch (e) {
       console.log(e);
@@ -109,3 +120,11 @@ defineExpose({
   pagination,
 });
 </script>
+<style lang="less">
+.tongji {
+  display: flex;
+  .item {
+    margin-right: 10px;
+  }
+}
+</style>

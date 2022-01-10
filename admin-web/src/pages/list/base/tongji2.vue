@@ -5,7 +5,7 @@
         <div class="left-operation-container">
           <t-breadcrumb :max-item-width="'150'">
             <t-breadcrumbItem to="/">发票管理</t-breadcrumbItem>
-            <t-breadcrumbItem>开票统计</t-breadcrumbItem>
+            <t-breadcrumbItem>作废统计</t-breadcrumbItem>
           </t-breadcrumb>
         </div>
       </t-row>
@@ -41,7 +41,7 @@ import { MessagePlugin } from 'tdesign-vue-next';
 import Card from '@/components/card/index.vue';
 import invoice from './components/invoice.vue';
 
-const tabItem = ref(1);
+const tabItem = ref(2);
 const formData: {
   invoiceType: string;
   beginDate?: string;
