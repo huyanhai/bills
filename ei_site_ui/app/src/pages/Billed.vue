@@ -147,7 +147,7 @@ export default {
           state = "待确认";
           break;
         case 1:
-          state = "已确认";
+          state = "验签中";
           break;
         case 2:
           state = "开票成功";
@@ -162,10 +162,10 @@ export default {
           state = "取消开票";
           break;
         case 6:
-          state = "验签中";
+          state = "开票中";
           break;
         case 7:
-          state = "红票验签中";
+          state = "冲红中";
           break;
         default:
           break;

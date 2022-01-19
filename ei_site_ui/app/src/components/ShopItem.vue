@@ -7,7 +7,7 @@
           待确认
         </view>
         <view class="type" v-if="types === '1'">
-          已确认
+          验签中
         </view>
         <view class="type blue" v-if="types === '2'">
           开票成功
@@ -22,10 +22,10 @@
           取消开票
         </view>
         <view class="type" v-if="types === '6'">
-          验签中
+          开票中
         </view>
         <view class="type" v-if="types === '7'">
-          红票验签中
+          冲红中
         </view>
       </view>
     </view>

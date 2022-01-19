@@ -56,6 +56,9 @@
       <van-button type="info" size="small" @click="jihuo(item.id)" v-if="item.state === -1">
         商户激活
       </van-button>
+      <van-button type="info" size="small" @click="FuWuFei(item.id)">
+        服务费
+      </van-button>
     </view>
   </view>
 </template>
@@ -91,6 +94,11 @@ export default {
   methods: {
     jihuo(id) {
       this.$emit('jihuo', id);
+    },
+    FuWuFei(id) {
+      uni.navigateTo({
+        url: `FuWuFei?id=${id}`,
+      });
     },
     goShopInfos(type, id) {
       uni.navigateTo({

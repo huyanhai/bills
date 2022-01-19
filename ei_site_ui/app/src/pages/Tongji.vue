@@ -7,7 +7,7 @@
       <view class="sousuo">
         <view class="start-t" @click="showTime(1)">{{ startTime || "开始时间" }}</view>
         <view class="start-t" @click="showTime(2)">{{ endTime || "结束时间" }}</view>
-        <van-button type="info" class="ui-button" size="mini" @click="getData('search')">
+        <van-button type="info" class="ui-button" @click="getData('search')">
           搜索
         </van-button>
       </view>
@@ -34,7 +34,7 @@
             </view>
             <view class="item">
               <view class="col-l">开票时间</view>
-              <view class="col-r">{{ item.outInvoiceTime }}</view>
+              <view class="col-r">{{ item.outInvoiceTime.split(" ")[0] }}</view>
             </view>
           </view>
         </Card>
@@ -66,23 +66,23 @@ export default {
       search: "",
       screenHeight: 0,
       pageLength: 0,
-      startTime: "",
-      startTimeV: "",
-      endTime: "",
-      endTimeV: "",
+      startTime: dayjs(new Date()).format("YYYY-MM-DD"),
+      startTimeV: Date.parse(new Date()),
+      endTime: dayjs(new Date()).format("YYYY-MM-DD"),
+      endTimeV: Date.parse(new Date()),
       show: false,
       timeType: 1,
       invoiceType: {
-        4: "专票（纸票）",
-        7: "普票（纸票）",
-        26: "普票（电票）",
-        28: "专票（电票）",
+        4: "增值税专用纸票",
+        7: "增值税普通纸票",
+        26: "增值税普通电票",
+        28: "增值税专用通电票",
       },
       tongjixinxi: {},
     };
   },
   onLoad(opt) {
-    this.screenHeight = wx.getSystemInfoSync().windowHeight - 50;
+    this.screenHeight = wx.getSystemInfoSync().windowHeight - 200;
   },
   onShow() {
     this.getData();
@@ -150,6 +150,7 @@ export default {
             icon: "none",
           });
         }
+        this.page = 1;
       }
       const { data, msg } = await post(url, {
         page: this.page,
@@ -162,7 +163,7 @@ export default {
       this.pageLength = Number(msg || 0);
       this.tongjixinxi.sumMoney = data.sumMoney;
       this.tongjixinxi.sumNumber = data.sumNumber;
-      if (type) {
+      if (type && type !== "search") {
         data.list.map((item) => {
           this.list.push(item);
         });
@@ -179,10 +180,11 @@ export default {
 
 <style lang="scss">
 .page-billing {
-  min-height: 100vh;
+  height: 100vh;
   background: #eee;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
   .tab-hd {
     display: flex;
     align-items: center;
@@ -220,14 +222,11 @@ export default {
     flex: 1 0 auto;
     min-height: 20vh;
     box-sizing: border-box;
-    padding: 30rpx;
-    .card-item {
-      margin: 30rpx 30rpx 0 30rpx;
-    }
+    padding: 30rpx 0;
   }
   .m-card {
     display: block;
-    margin-bottom: 30rpx;
+    margin: 0 30rpx 30rpx 30rpx;
   }
   .infos {
     .item {
@@ -272,20 +271,21 @@ export default {
   background: #fff;
   align-items: center;
   padding: 20rpx 32rpx;
+  flex-direction: column;
   .start-t {
-    width: 100rpx;
+    width: 100%;
     font-size: 24rpx;
     flex: 1 0 auto;
     text-align: center;
     background: rgba($color: #000000, $alpha: 0.2);
-    height: 52rpx;
-    line-height: 52rpx;
-    &:first-child {
-      margin-right: 20rpx;
-    }
-    &:nth-child(2) {
-      margin-left: 20rpx;
-      margin-right: 20rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    margin-bottom: 20rpx;
+  }
+  .ui-button {
+    width: 100%;
+    button {
+      width: 100%;
     }
   }
 }

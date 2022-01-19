@@ -52,6 +52,7 @@ export default defineComponent({
     sideMenu() {
       const { layout, splitMenu } = this.$store.state.setting;
       let { menuRouters } = this;
+
       if (layout === 'mix' && splitMenu) {
         menuRouters.forEach((menu) => {
           if (this.$route.path.indexOf(menu.path) === 0) {
@@ -59,6 +60,17 @@ export default defineComponent({
           }
         });
       }
+      menuRouters.map((e) => {
+        const item = e.children.filter((i) => {
+          if (!i.meta.hide) {
+            return e;
+          }
+          return '';
+        });
+        e.children = item;
+        return e;
+      });
+
       return menuRouters;
     },
   },

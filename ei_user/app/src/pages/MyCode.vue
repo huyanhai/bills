@@ -25,6 +25,7 @@
         </view>
       </Card>
     </scroll-view>
+    <ad class="ad" unit-id="adunit-efa6b966bc742131"></ad>
   </view>
 </template>
 
@@ -57,7 +58,7 @@ export default {
     Card,
   },
   onLoad() {
-    this.screenHeight = wx.getSystemInfoSync().windowHeight - 50;
+    this.screenHeight = wx.getSystemInfoSync().windowHeight - 222;
   },
   async onShow() {
     await this.checkAuth();
@@ -121,6 +122,8 @@ export default {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  padding-bottom: 270rpx;
+  box-sizing: border-box;
   .box {
     padding: 30rpx;
     flex: 1 0 auto;
@@ -152,5 +155,12 @@ export default {
       }
     }
   }
+}
+.ad {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100rpx !important;
+  left: 0;
 }
 </style>

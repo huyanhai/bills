@@ -17,6 +17,7 @@
         </view>
       </Card>
     </scroll-view>
+    <ad class="ad" unit-id="adunit-efa6b966bc742131"></ad>
   </view>
 </template>
 
@@ -39,7 +40,7 @@ export default {
     if (!authCode) {
       await userLogin();
     }
-    this.screenHeight = wx.getSystemInfoSync().windowHeight - 50;
+    this.screenHeight = wx.getSystemInfoSync().windowHeight - 200;
   },
   onShow() {
     this.getList();
@@ -76,6 +77,13 @@ export default {
 </script>
 
 <style lang="scss">
+.ad {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60rpx;
+  left: 0;
+}
 .page-null {
   height: 100vh;
   background: #eee;

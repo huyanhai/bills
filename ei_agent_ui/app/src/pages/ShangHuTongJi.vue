@@ -31,12 +31,21 @@
                 <view class="item">
                   <view class="col-l">本月冲红金额:{{ item.redMoney }}</view>
                 </view>
+                <view class="item">
+                  <view class="col-l">本月作废:{{ item.cancelNumber }}张</view>
+                </view>
+                <view class="item">
+                  <view class="col-l">本月作废金额:{{ item.cancelMoney }}元</view>
+                </view>
                 <view class="foot">
                   <van-button type="info" size="small" @click="tongji(item.siteId, 1)">
                     开票统计
                   </van-button>
                   <van-button type="info" size="small" @click="tongji(item.siteId, 2)">
                     冲红统计
+                  </van-button>
+                  <van-button type="info" size="small" @click="tongji(item.siteId, 3)">
+                    作废统计
                   </van-button>
                 </view>
               </view>

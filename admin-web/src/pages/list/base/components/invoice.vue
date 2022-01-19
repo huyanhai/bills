@@ -50,6 +50,9 @@ const props = defineProps({
     type: Number,
     default: 1,
   },
+  formData: {
+    type: Object,
+  },
 });
 
 const invoiceTypeCode = reactive({
@@ -111,7 +114,7 @@ const rehandleChange = (curr) => {
   pagination.value.defaultCurrent = current;
   pagination.value.defaultPageSize = pageSize;
 
-  getData();
+  getData(props.formData);
 };
 
 defineExpose({

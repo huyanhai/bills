@@ -215,6 +215,12 @@
       "style": {
         "navigationBarTitleText": "红票"
       }
+    },
+    {
+      "path": "pages/FuWuFei",
+      "style": {
+        "navigationBarTitleText": "服务费"
+      }
     }
   ],
   "window": {

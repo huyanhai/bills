@@ -30,7 +30,7 @@
           </t-form>
         </t-col>
       </t-row>
-      <invoice ref="invoiceCom" :type="tabItem" />
+      <invoice ref="invoiceCom" :type="tabItem" :form-data="formData" />
     </card>
   </div>
 </template>
@@ -57,7 +57,7 @@ const search = () => {
       return MessagePlugin.error('开始或结束时间为空');
     }
   }
-  invoiceCom.value.pagination.defaultPageSize = 1;
+  invoiceCom.value.pagination.defaultCurrent = 1;
   invoiceCom.value.getData(formData);
 };
 

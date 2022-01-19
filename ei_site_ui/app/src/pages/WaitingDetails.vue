@@ -63,7 +63,7 @@
         </view>
         <view class="item">
           <view class="col-l">
-            <CInput label="开票金额" titlew="100rpx" :value.sync="form.money" :type="number" placeholder="请输入价格" :required="true"> </CInput>
+            <CInput label="金额" titlew="100rpx" :value.sync="form.money" :type="number" placeholder="请输入价格" :required="true"> </CInput>
           </view>
         </view>
         <view class="item">

@@ -28,6 +28,27 @@ export default [
         meta: { title: '冲红作废管理', hide: false },
       },
       {
+        path: 'tick',
+        name: 'tick',
+        component: () => import('@/pages/list/base/tick.vue'),
+        meta: { title: '发票管理', hide: true },
+      },
+      {
+        path: 'tick1',
+        name: 'tick1',
+        component: () => import('@/pages/list/base/tick1.vue'),
+        meta: { title: '发票管理', hide: true },
+      },
+    ],
+  },
+  {
+    path: '/tongji',
+    name: 'tongji',
+    component: Layout,
+    redirect: '/tongji/invoice',
+    meta: { title: '统计中心', icon: ListIcon, hide: false },
+    children: [
+      {
         path: 'invoice',
         name: 'invoice',
         component: () => import('@/pages/list/base/tongji.vue'),
@@ -44,18 +65,6 @@ export default [
         name: 'red',
         component: () => import('@/pages/list/base/tongji3.vue'),
         meta: { title: '冲红统计', hide: false },
-      },
-      {
-        path: 'tick',
-        name: 'tick',
-        component: () => import('@/pages/list/base/tick.vue'),
-        meta: { title: '发票管理', hide: true },
-      },
-      {
-        path: 'tick1',
-        name: 'tick1',
-        component: () => import('@/pages/list/base/tick1.vue'),
-        meta: { title: '发票管理', hide: true },
       },
     ],
   },

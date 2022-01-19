@@ -13,7 +13,29 @@
     <view class="box">
       <template v-if="pageData.length > 0">
         <Card :paddingTop="false" v-for="item in pageData" :key="item.id">
-          <view class="infos">
+          <view class="infos" v-if="type === 3">
+            <view class="item">
+              <view class="col-l">发票类型 </view>
+              <view class="col-r">{{ invoiceType[item.invoiceType] }}</view>
+            </view>
+            <view class="item">
+              <view class="col-l">商户名称</view>
+              <view class="col-r">{{ item.siteName }}</view>
+            </view>
+            <view class="item">
+              <view class="col-l">作废金额</view>
+              <view class="col-r">{{ item.money || '0' }}元</view>
+            </view>
+            <view class="item">
+              <view class="col-l">作废数量</view>
+              <view class="col-r">{{ item.number }}张</view>
+            </view>
+            <view class="item">
+              <view class="col-l">作废时间</view>
+              <view class="col-r">{{ splitTime(item.outInvoiceTime) || '' }}</view>
+            </view>
+          </view>
+          <view class="infos" v-else>
             <view class="item">
               <view class="col-l">发票类型</view>
               <view class="col-r">{{ invoiceType[item.invoiceType] }}</view>
@@ -63,6 +85,10 @@ export default {
       page: 1,
       limit: 100,
       pageData: {},
+      invoiceType1: {
+        1: '专用纸票',
+        2: '普通纸票',
+      },
       invoiceType: {
         4: '增值税专用发票（纸票）',
         7: '增值税普通发票（纸票）',
@@ -128,6 +154,9 @@ export default {
       let url = 'agent/site_day_invoice/page';
       if (this.type === 2) {
         url = 'agent/site_day_red_invoice/page';
+      }
+      if (this.type === 3) {
+        url = 'agent/site_day_cancel_invoice/page';
       }
       const { data } = await post(url, {
         page: this.page,
