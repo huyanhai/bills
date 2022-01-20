@@ -108,6 +108,12 @@
       "style": {
         "navigationBarTitleText": "开票统计"
       }
+    },
+    {
+      "path": "pages/WebView",
+      "style": {
+        "navigationBarTitleText": ""
+      }
     }
   ],
   "window": {

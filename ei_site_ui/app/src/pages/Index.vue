@@ -60,12 +60,15 @@
         <van-grid-item :icon="require('../static/image/kp.png')" text="开票统计" @click="goTongji" />
       </van-grid>
     </Card>
+    <van-dialog id="van-dialog" />
   </view>
 </template>
 
 <script>
 import Card from "../components/Card.vue";
 import { get } from "../../libs/request";
+import dayjs from "dayjs";
+import Dialog from "../wxcomponents/vant/dialog/dialog";
 
 export default {
   data() {
@@ -114,6 +117,25 @@ export default {
     }
   },
   methods: {
+    async goAuth() {
+      const { data } = await get("site/login/site/account");
+      if (data) {
+        this.data = data;
+        if (!data.osOpenid) {
+          Dialog.confirm({
+            title: "通知申请",
+            message: "授权我们发送异常通知信息",
+            confirmButtonText: "去授权",
+          })
+            .then(() => {
+              uni.navigateTo({
+                url: "WebView",
+              });
+            })
+            .catch(() => {});
+        }
+      }
+    },
     goTongji() {
       uni.navigateTo({
         url: `Tongji`,
@@ -142,10 +164,18 @@ export default {
       const { data } = await get("site/query/blank_invoice");
       if (data) {
         this.blankInvoice = data;
+        const last = (uni.getStorageSync("gq") || "").split("-");
+        const today = dayjs(new Date())
+          .format("YYYY-MM-DD")
+          .split("-");
         if (data?.valueAddedElectroniceInvoice < 10) {
+          if (last[last.length - 1] === today[today.length - 1]) return;
+          uni.setStorageSync("gq", dayjs(new Date()).format("YYYY-MM-DD"));
           uni.showModal({
             content: "发票数量不足，请及时领取",
           });
+        } else {
+          this.goAuth();
         }
       }
     },

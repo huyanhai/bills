@@ -66,9 +66,9 @@ export default {
       search: "",
       screenHeight: 0,
       pageLength: 0,
-      startTime: dayjs(new Date()).format("YYYY-MM-DD"),
+      startTime: "",
       startTimeV: Date.parse(new Date()),
-      endTime: dayjs(new Date()).format("YYYY-MM-DD"),
+      endTime: "",
       endTimeV: Date.parse(new Date()),
       show: false,
       timeType: 1,
@@ -143,12 +143,14 @@ export default {
           break;
       }
       if (type === "search") {
-        if (!this.startTime || !this.endTime) {
-          return uni.showToast({
-            title: "请选择时间",
-            duration: 2000,
-            icon: "none",
-          });
+        if (this.startTime || this.endTime) {
+          if (!this.startTime || !this.endTime) {
+            return uni.showToast({
+              title: "请选择时间",
+              duration: 2000,
+              icon: "none",
+            });
+          }
         }
         this.page = 1;
       }
